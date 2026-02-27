@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/edittext_regiistro_proveedor_nombre"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_registro"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="32dp">
+
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="¡Hola proveedor!"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Nombre:"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/white" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Correo:"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/edittext_regiistro_proveedor_correo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Contraseña:"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/edittext_regiistro_proveedor_contraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="textPassword"
+                android:textColor="@android:color/white" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tipo de servicio:"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/edittext_regiistro_proveedor_tiposervicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="text"
+                android:textColor="@android:color/white" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Descripción:"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:id="@+id/edittext_regiistro_proveedor_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:backgroundTint="@android:color/white"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:maxLines="4"
+                android:textColor="@android:color/white" />
+
+            <!-- Botón -->
+            <Button
+                android:id="@+id/button_regiistro_proveedor_registrarme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@android:color/white"
+                android:text="Registrarme"
+                android:textColor="#0D2E6E" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Sección inferior blanca -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="bottom"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FIXLY"
+            android:textColor="#0D2E6E"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
