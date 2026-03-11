@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="#f5f7fa">
 
-    <!-- HEADER -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="64dp"
@@ -42,7 +42,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- TITULO -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- BARRA INFERIOR -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
