@@ -20,6 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".RegistroClienteActivity" android:label="Registro Cliente" />
+        <activity android:name=".RegistroProveedorActivity" android:label="Registro Proveedor" />
+        <activity android:name=".InicioActivity" android:label="Inicio" />
+        <activity android:name=".ListaServiciosActivity" android:label="Lista de Servicios" />
+        <activity android:name=".PerfilProveedorActivity" android:label="Perfil del Proveedor" />
     </application>
 
 </manifest>

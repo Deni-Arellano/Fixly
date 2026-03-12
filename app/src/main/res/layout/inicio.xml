@@ -67,6 +67,7 @@
 
                 <!-- PLOMERÍA -->
                 <LinearLayout
+                    android:id="@+id/boton_inicio_plomeria"
                     android:layout_width="0dp"
                     android:layout_height="105dp"
                     android:layout_columnWeight="1"
@@ -75,7 +76,9 @@
                     android:gravity="center_vertical"
                     android:padding="10dp"
                     android:background="@android:color/white"
-                    android:elevation="3dp">
+                    android:elevation="3dp"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <TextView
                         android:layout_width="0dp"
@@ -244,7 +247,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/icono_solicitudes"
-            android:tint="#00296b"/>
+           />
 
         <FrameLayout
             android:layout_width="56dp"
