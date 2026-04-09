@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Colores base -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Paleta Fixly -->
+    <color name="azul_fixly">#00296b</color>
+    <color name="azul_oscuro_fixly">#0d2e6e</color>
+    <color name="amarillo_fixly">#fdc500</color>
+    <color name="gris_fondo">#f5f7fa</color>
+    <color name="gris_texto">#555555</color>
 </resources>

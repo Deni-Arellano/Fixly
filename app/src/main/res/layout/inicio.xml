@@ -1,36 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#f5f7fa">
+    android:background="@color/gris_fondo">
 
+    <!-- Menú superior (logo, salir) -->
+    <include layout="@layout/header" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="#00296b"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="16dp">
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/logo"
-            android:scaleType="fitCenter"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="FIXLY"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginStart="12dp"/>
-    </LinearLayout>
-
-
+    <!-- Contenido principal -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -48,16 +28,16 @@
                 android:text="¡Hola Fani!"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="#00296b"/>
+                android:textColor="@color/azul_fixly"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¿Qué servicio necesitas hoy?"
-                android:textColor="#555555"
+                android:textColor="@color/gris_texto"
                 android:layout_marginBottom="20dp"/>
 
-            <!-- GRID SERVICIOS -->
+            <!-- Servicios -->
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +45,7 @@
                 android:useDefaultMargins="false"
                 android:layout_marginBottom="12dp">
 
-                <!-- PLOMERÍA -->
+                <!-- plomería -->
                 <LinearLayout
                     android:id="@+id/boton_inicio_plomeria"
                     android:layout_width="0dp"
@@ -86,7 +66,7 @@
                         android:layout_gravity="bottom"
                         android:layout_weight="1"
                         android:text="Plomería"
-                        android:textColor="#00296b"
+                        android:textColor="@color/azul_fixly"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
@@ -97,7 +77,7 @@
                         android:src="@drawable/plome" />
                 </LinearLayout>
 
-                <!-- ELECTRICIDAD -->
+                <!-- electricidad -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="105dp"
@@ -115,7 +95,7 @@
                         android:layout_gravity="bottom"
                         android:layout_weight="1"
                         android:text="Electricidad"
-                        android:textColor="#00296b"
+                        android:textColor="@color/azul_fixly"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
@@ -126,7 +106,7 @@
                         android:src="@drawable/electric" />
                 </LinearLayout>
 
-                <!-- CERRAJERÍA -->
+                <!-- cerrajería -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="105dp"
@@ -144,7 +124,7 @@
                         android:layout_gravity="bottom"
                         android:layout_weight="1"
                         android:text="Cerrajería"
-                        android:textColor="#00296b"
+                        android:textColor="@color/azul_fixly"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
@@ -155,7 +135,7 @@
                         android:src="@drawable/cerraje" />
                 </LinearLayout>
 
-                <!-- MECÁNICA -->
+                <!-- mecánica -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="105dp"
@@ -173,7 +153,7 @@
                         android:layout_gravity="bottom"
                         android:layout_weight="1"
                         android:text="Mecánica"
-                        android:textColor="#00296b"
+                        android:textColor="@color/azul_fixly"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
@@ -186,23 +166,22 @@
 
             </GridLayout>
 
-
             <Button
                 android:id="@+id/btnVerMas"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="Ver más servicios"
                 android:textAllCaps="false"
-                android:textColor="#00296b"
+                android:textColor="@color/azul_fixly"
                 android:textStyle="bold"
-                android:backgroundTint="#fdc500"
+                android:backgroundTint="@color/amarillo_fixly"
                 android:layout_marginTop="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profesionales destacados"
-                android:textColor="#00296b"
+                android:textColor="@color/azul_fixly"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="28dp"
@@ -214,12 +193,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"/>
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Solicitudes"
-                android:textColor="#00296b"
+                android:textColor="@color/azul_fixly"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="28dp"
@@ -235,41 +213,7 @@
 
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@android:color/white"
-        android:elevation="8dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/icono_solicitudes"
-           />
-
-        <FrameLayout
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginHorizontal="36dp"
-            android:background="@drawable/bg_home"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_gravity="center"
-                android:src="@drawable/icono_home"
-                android:tint="#00296b" />
-        </FrameLayout>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/icono_usuario"
-            android:tint="#00296b"/>
-
-    </LinearLayout>
+    <!-- barra inferior (historial, home, mi perfil) -->
+    <include layout="@layout/bottom_nav" />
 
 </LinearLayout>
