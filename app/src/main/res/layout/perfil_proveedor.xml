@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
+    android:id="@+id/layout_principal_perfil_proveedor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#f5f7fa">
+    android:background="@color/gris_fondo">
 
-    <include layout="@layout/header" />
+    <include layout="@layout/header"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,150 +15,128 @@
         android:layout_weight="1">
 
         <LinearLayout
+            android:id="@+id/contenedor_contenido_perfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:padding="20dp">
+            android:padding="16dp">
 
+            <!-- FOTO -->
             <FrameLayout
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/borde_foto"
-                android:padding="8dp">
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:background="@drawable/fondo_imagen_redondeada"
+                android:padding="4dp">
 
                 <ImageView
+                    android:id="@+id/imagen_proveedor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/foto_perfil"
-                    android:scaleType="centerCrop"/>
-
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/imagen_redondeada"
+                    android:clipToOutline="true"
+                    android:src="@drawable/ic_usuario_placeholder"/>
             </FrameLayout>
 
+            <!-- NOMBRE -->
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/texto_nombre_proveedor"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Martin Orozco Ramirez"
+                android:text="Nombre Apellido"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:textColor="#00296b"
-                android:layout_marginTop="20dp"/>
+                android:textColor="@color/azul_fixly"
+                android:gravity="center"
+                android:layout_marginTop="12dp"/>
 
+            <!-- TELEFONO -->
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Plomero"
-                android:textSize="18sp"
-                android:textColor="#00296b"
-                android:layout_marginTop="6dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="789 102 96 74"
-                android:textSize="18sp"
-                android:textColor="#00296b"
-                android:layout_marginTop="6dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Oliveres #89"
-                android:textSize="18sp"
-                android:textColor="#00296b"
-                android:layout_marginTop="6dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="La solución a su plomeria"
-                android:textSize="14sp"
-                android:textColor="#00296b"
-                android:layout_marginTop="6dp"/>
-
-            <Button
-                android:id="@+id/btnVerMas"
+                android:id="@+id/texto_telefono_proveedor"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="Solicitar servicio"
-                android:textAllCaps="false"
-                android:textColor="#00296b"
-                android:textStyle="bold"
-                android:backgroundTint="#fdc500"
-                android:layout_marginTop="20dp"/>
+                android:layout_height="wrap_content"
+                android:text="999 123 45 67"
+                android:gravity="center"
+                android:layout_marginTop="4dp"/>
 
+            <!-- DESCRIPCION -->
+            <TextView
+                android:id="@+id/texto_descripcion_proveedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripción..."
+                android:gravity="center"
+                android:layout_marginTop="8dp"/>
+
+            <!-- RATING -->
             <RatingBar
+                android:id="@+id/rating_proveedor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-                android:rating="4"
-                android:stepSize="1"
+                android:stepSize="0.5"
                 android:isIndicator="true"
-                android:layout_marginTop="20dp"/>
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"/>
+
+            <!-- SERVICIOS -->
+            <TextView
+                android:id="@+id/titulo_servicios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Servicios"
+                android:textStyle="bold"
+                android:textColor="@color/azul_fixly"
+                android:layout_marginTop="16dp"/>
 
             <TextView
+                android:id="@+id/texto_servicios_proveedor"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Servicios..."
+                android:layout_marginTop="4dp"/>
+
+            <!-- BOTON -->
+            <Button
+                android:id="@+id/boton_solicitar_servicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Solicitar servicio"
+                android:backgroundTint="@color/amarillo_fixly"
+                android:textColor="@color/azul_fixly"
+                android:layout_marginTop="16dp"/>
+
+            <!-- COMENTARIOS -->
+            <TextView
+                android:id="@+id/titulo_comentarios"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Comentarios"
                 android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#00296b"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"/>
+                android:textColor="@color/azul_fixly"
+                android:layout_marginTop="16dp"/>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/texto_sin_comentarios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:padding="12dp"
-                android:layout_marginBottom="10dp"
-                android:elevation="2dp"
-                android:orientation="vertical">
+                android:text="Aún no hay comentarios"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"/>
 
-                <TextView
-                    android:text="Juan Perez"
-                    android:textStyle="bold"
-                    android:textColor="#00296b"
-                    android:textSize="14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:text="Excelente servicio, muy rápido y profesional."
-                    android:textSize="14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lista_comentarios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:padding="12dp"
-                android:layout_marginBottom="10dp"
-                android:elevation="2dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:text="Maria Lopez"
-                    android:textStyle="bold"
-                    android:textColor="#00296b"
-                    android:textSize="14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:text="Me arregló una fuga en minutos. Muy recomendado."
-                    android:textSize="14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+                android:nestedScrollingEnabled="false"
+                android:layout_marginTop="8dp"/>
 
         </LinearLayout>
 
     </ScrollView>
 
-    <include layout="@layout/bottom_nav" />
+    <include layout="@layout/bottom_nav"/>
 
 </LinearLayout>

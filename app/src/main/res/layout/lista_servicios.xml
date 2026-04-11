@@ -1,65 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- la lista de todos los proveedores de un servicio -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
+    android:id="@+id/layout_principal_proveedores"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#f5f7fa">
+    android:background="@color/gris_fondo">
 
+    <include layout="@layout/header"/>
 
-    <include layout="@layout/header" />
-
-    <ScrollView
+    <!-- contenido  -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/titulo_servicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:text="¿Necesitas servicio de [Servicio]?"
+            android:textColor="@color/azul_fixly"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:padding="16dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="¿Necesitas servicio de plomería?"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="#00296b"
-                android:layout_marginBottom="20dp"/>
+        <!-- Lista de todos los proveedores que va a crecer  -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lista_proveedores"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="12dp"
+            android:clipToPadding="false"/>
 
-            <ImageButton
-                android:id="@+id/plomero1"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_plomero"
-                android:scaleType="fitXY"
-                android:src="@drawable/plomero1"/>
+    </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/plomero2"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_plomero"
-                android:scaleType="fitXY"
-                android:src="@drawable/plomero2"/>
-
-            <ImageButton
-                android:id="@+id/plomero3"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/card_plomero"
-                android:scaleType="fitXY"
-                android:src="@drawable/plomero3"/>
-
-        </LinearLayout>
-    </ScrollView>
-
-    <include layout="@layout/bottom_nav" />
+    <include layout="@layout/bottom_nav"/>
 
 </LinearLayout>
