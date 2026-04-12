@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_principal_calificar_servicio"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <include layout="@layout/header"/>
+
+    <!-- contenido  -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/layout_contenido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/texto_titulo_pantalla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Califica tu experiencia"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/azul_fixly"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- tarjeta principal  -->
+            <LinearLayout
+                android:id="@+id/tarjeta_principal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/fondo_tarjeta"
+                android:padding="20dp"
+                android:layout_marginBottom="20dp"
+                android:elevation="4dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Proveedor:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="4dp"/>
+
+                <!-- nombre del proveedor -->
+                <TextView
+                    android:id="@+id/texto_nombre_proveedor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Juan Pérez"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#222222"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- estrellitas -->
+                <RatingBar
+                    android:id="@+id/rating_calificacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:stepSize="1"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Selecciona las estrellas"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <!-- tarjeta del comentario -->
+            <LinearLayout
+                android:id="@+id/tarjeta_comentario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/fondo_tarjeta"
+                android:padding="16dp"
+                android:elevation="3dp"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comentario"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/input_comentario"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:hint="Escribe tu experiencia..."
+                    android:background="@drawable/fondo_input"
+                    android:padding="12dp"
+                    android:gravity="top"
+                    android:textSize="14sp"
+                    android:inputType="textMultiLine"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/boton_enviar_calificacion"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Enviar calificación"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/amarillo_fixly"
+                android:textColor="@color/azul_fixly"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/bottom_nav"/>
+
+</LinearLayout>
