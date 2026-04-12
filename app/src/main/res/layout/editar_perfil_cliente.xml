@@ -157,33 +157,33 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/boton_guardar_editar_perfil_cliente"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:backgroundTint="@color/amarillo_fixly"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:text="Guardar"
+                android:textAllCaps="false"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:textAllCaps="false"
-                app:cornerRadius="4dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"/>
+                app:cornerRadius="4dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/boton_cancelar_guardar_editar_perfil_cliente"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="24dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:text="Cancelar"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 app:cornerRadius="4dp"
                 app:strokeColor="@color/gris_texto"
-                app:strokeWidth="1dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"/>
+                app:strokeWidth="1dp" />
 
         </LinearLayout>
     </ScrollView>
