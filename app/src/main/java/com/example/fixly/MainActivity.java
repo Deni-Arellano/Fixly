@@ -56,14 +56,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Button btnIngresar = findViewById(R.id.boton_login_ingresar);
+        Button btnIngresar = findViewById(R.id.boton_ingresar_login);
         btnIngresar.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, InicioActivity.class);
             startActivity(intent);
         });
 
 
-        TextView tvRegistrarse = findViewById(R.id.textview_login_registrarse);
+        TextView tvRegistrarse = findViewById(R.id.textview_registrarse_login);
         tvRegistrarse.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, RegistroClienteActivity.class);
             startActivity(intent);

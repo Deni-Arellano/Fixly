@@ -11,10 +11,10 @@ public class InicioActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setupEdgeToEdge(R.layout.inicio);
-
+        /*
         View btnPlomeria = findViewById(R.id.boton_inicio_plomeria);
         btnPlomeria.setOnClickListener(v -> {
             startActivity(new Intent(this, ListaServiciosActivity.class));
-        });
+        });*/
     }
 }

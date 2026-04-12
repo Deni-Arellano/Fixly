@@ -50,7 +50,7 @@ public class RegistroClienteActivity extends AppCompatActivity {
             return insets;
         });
 
-        Button btnRegistrarme = findViewById(R.id.button_regiistro_cliente_registrarme);
+        Button btnRegistrarme = findViewById(R.id.boton_registrarme_registro_cliente);
         if (btnRegistrarme != null) {
             btnRegistrarme.setOnClickListener(view -> {
                 Intent intent = new Intent(RegistroClienteActivity.this, RegistroProveedorActivity.class);

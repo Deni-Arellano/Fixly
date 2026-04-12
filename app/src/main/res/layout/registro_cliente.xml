@@ -7,94 +7,163 @@
     android:orientation="vertical"
     android:background="@drawable/bg_registro">
 
-    <LinearLayout
+    <!-- 🔹 SCROLLVIEW PRINCIPAL -->
+    <ScrollView
         android:id="@+id/top_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
-        android:orientation="vertical"
-        android:padding="32dp">
+        android:fillViewport="true">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/logo" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¡Hola cliente!"
-            android:textColor="@android:color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre:"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="16dp"/>
-
-        <EditText
-            android:id="@+id/edittext_regiistro_cliente_nombre"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/white"
-            android:inputType="textPersonName"
-            android:textColor="@android:color/white" />
+            android:orientation="vertical"
+            android:padding="32dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Correo:"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="16dp"/>
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo" />
 
-        <EditText
-            android:id="@+id/edittext_regiistro_cliente_correo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/white"
-            android:inputType="textEmailAddress"
-            android:textColor="@android:color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¡Hola cliente!"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contraseña:"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="16dp"/>
+            <!-- CAMPO: NOMBRE -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre:"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"/>
 
-        <EditText
-            android:id="@+id/edittext_regiistro_cliente_contraseña"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/white"
-            android:inputType="textPassword"
-            android:textColor="@android:color/white" />
+            <EditText
+                android:id="@+id/input_nombre_registro_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/white" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+            <!-- CAMPO: APELLIDO PATERNO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellido paterno:"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"/>
 
-        <Button
-            android:id="@+id/button_regiistro_cliente_registrarme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/white"
-            android:text="Registrarme"
-            android:textColor="#0D2E6E" />
+            <EditText
+                android:id="@+id/input_apellido_paterno_registro_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/white" />
 
-    </LinearLayout>
+            <!-- CAMPO: APELLIDO MATERNO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellido materno:"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/input_apellido_materno_registro_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/white" />
+
+            <!-- CAMPO: CORREO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correo:"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/input_correo_registro_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/white" />
+
+            <!-- CAMPO: CONTRASEÑA -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contraseña:"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/input_contraseña_registro_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="textPassword"
+                android:textColor="@android:color/white" />
+
+            <!-- CAMPO: REPITE CONTRASEÑA -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Repite la contraseña:"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/input_repite_contraseña_registro_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="textPassword"
+                android:textColor="@android:color/white" />
+
+            <!-- CAMPO: TELÉFONO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teléfono:"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/input_telefono_registro_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="phone"
+                android:textColor="@android:color/white" />
+
+            <!-- BOTÓN REGISTRARME -->
+            <Button
+                android:id="@+id/boton_registrarme_registro_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@android:color/white"
+                android:text="Registrarme"
+                android:textColor="#0D2E6E" />
+
+        </LinearLayout>
+    </ScrollView>
+
 
     <LinearLayout
         android:id="@+id/bottom_container"

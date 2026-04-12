@@ -7,7 +7,9 @@
     <!-- Paleta Fixly -->
     <color name="azul_fixly">#00296b</color>
     <color name="azul_oscuro_fixly">#0d2e6e</color>
+    <color name="azul_medio_fixly">#00509d</color>
     <color name="amarillo_fixly">#fdc500</color>
     <color name="gris_fondo">#f5f7fa</color>
-    <color name="gris_texto">#555555</color>
+    <color name="gris_texto">#b4b4b4</color>
+    <color name="azul_claro_fixly">#d6e2ef</color>
 </resources>

@@ -45,9 +45,9 @@
                 android:useDefaultMargins="false"
                 android:layout_marginBottom="12dp">
 
-                <!-- plomería -->
+                <!-- 1. Plomería -->
                 <LinearLayout
-                    android:id="@+id/boton_inicio_plomeria"
+                    android:id="@+id/boton_plomeria_inicio"
                     android:layout_width="0dp"
                     android:layout_height="105dp"
                     android:layout_columnWeight="1"
@@ -74,11 +74,12 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="top"
-                        android:src="@drawable/plome" />
+                        android:src="@drawable/ic_serv_plomeria" />
                 </LinearLayout>
 
-                <!-- electricidad -->
+                <!-- 2. Electricidad -->
                 <LinearLayout
+                    android:id="@+id/boton_electricidad_inicio"
                     android:layout_width="0dp"
                     android:layout_height="105dp"
                     android:layout_columnWeight="1"
@@ -87,7 +88,9 @@
                     android:gravity="center_vertical"
                     android:padding="10dp"
                     android:background="@android:color/white"
-                    android:elevation="3dp">
+                    android:elevation="3dp"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <TextView
                         android:layout_width="0dp"
@@ -103,11 +106,12 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="top"
-                        android:src="@drawable/electric" />
+                        android:src="@drawable/ic_serv_electricidad" />
                 </LinearLayout>
 
-                <!-- cerrajería -->
+                <!-- 3. Jardinería -->
                 <LinearLayout
+                    android:id="@+id/boton_jardineria_inicio"
                     android:layout_width="0dp"
                     android:layout_height="105dp"
                     android:layout_columnWeight="1"
@@ -116,7 +120,105 @@
                     android:gravity="center_vertical"
                     android:padding="10dp"
                     android:background="@android:color/white"
-                    android:elevation="3dp">
+                    android:elevation="3dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        android:text="Jardinería"
+                        android:textColor="@color/azul_fixly"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="top"
+                        android:src="@drawable/ic_serv_jardineria" />
+                </LinearLayout>
+
+                <!-- 4. Limpieza -->
+                <LinearLayout
+                    android:id="@+id/boton_limpieza_inicio"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:background="@android:color/white"
+                    android:elevation="3dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        android:text="Limpieza"
+                        android:textColor="@color/azul_fixly"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="top"
+                        android:src="@drawable/ic_serv_limpieza" />
+                </LinearLayout>
+
+                <!-- 5. Pintura -->
+                <LinearLayout
+                    android:id="@+id/boton_pintura_inicio"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:background="@android:color/white"
+                    android:elevation="3dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        android:text="Pintura"
+                        android:textColor="@color/azul_fixly"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="top"
+                        android:src="@drawable/ic_serv_pintura" />
+                </LinearLayout>
+
+                <!-- 6. Cerrajería -->
+                <LinearLayout
+                    android:id="@+id/boton_cerrajeria_inicio"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:background="@android:color/white"
+                    android:elevation="3dp"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <TextView
                         android:layout_width="0dp"
@@ -132,11 +234,12 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="top"
-                        android:src="@drawable/cerraje" />
+                        android:src="@drawable/ic_serv_cerrajeria" />
                 </LinearLayout>
 
-                <!-- mecánica -->
+                <!-- 7. Mecánica -->
                 <LinearLayout
+                    android:id="@+id/boton_mecanica_inicio"
                     android:layout_width="0dp"
                     android:layout_height="105dp"
                     android:layout_columnWeight="1"
@@ -145,7 +248,9 @@
                     android:gravity="center_vertical"
                     android:padding="10dp"
                     android:background="@android:color/white"
-                    android:elevation="3dp">
+                    android:elevation="3dp"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <TextView
                         android:layout_width="0dp"
@@ -161,54 +266,42 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="top"
-                        android:src="@drawable/mecanic" />
+                        android:src="@drawable/ic_serv_mecanica" />
+                </LinearLayout>
+
+                <!-- 8. Instalación de equipos -->
+                <LinearLayout
+                    android:id="@+id/boton_instalacion_inicio"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:background="@android:color/white"
+                    android:elevation="3dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        android:text="Instalación"
+                        android:textColor="@color/azul_fixly"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="top"
+                        android:src="@drawable/ic_serv_instalacion" />
                 </LinearLayout>
 
             </GridLayout>
-
-            <Button
-                android:id="@+id/btnVerMas"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="Ver más servicios"
-                android:textAllCaps="false"
-                android:textColor="@color/azul_fixly"
-                android:textStyle="bold"
-                android:backgroundTint="@color/amarillo_fixly"
-                android:layout_marginTop="20dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profesionales destacados"
-                android:textColor="@color/azul_fixly"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="28dp"
-                android:layout_marginBottom="12dp"/>
-
-            <LinearLayout
-                android:id="@+id/containerDestacados"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Solicitudes"
-                android:textColor="@color/azul_fixly"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="28dp"
-                android:layout_marginBottom="12dp"/>
-
-            <LinearLayout
-                android:id="@+id/containerSolicitudes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
-
         </LinearLayout>
 
     </ScrollView>

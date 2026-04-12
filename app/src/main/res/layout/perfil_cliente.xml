@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_principal_perfil_cliente"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gris_fondo">
+
+    <include layout="@layout/header"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/contenedor_contenido_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <FrameLayout
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:background="@drawable/fondo_imagen_redondeada_perfil"
+                android:padding="4dp"
+                android:layout_marginTop="24dp">
+
+                <ImageView
+                    android:id="@+id/imagen_perfil_cliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/imagen_redondeada"
+                    android:clipToOutline="true"
+                    android:src="@drawable/ic_usuario_placeholder"/>
+            </FrameLayout>
+
+            <!-- NOMBRE DEL CLIENTE -->
+            <TextView
+                android:id="@+id/texto_nombre_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre Apellido"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textColor="@color/azul_fixly"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="28dp"/>
+
+            <!-- TARJETA DE INFORMACIÓN -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:elevation="3dp"
+                android:padding="8dp">
+
+                <!-- BLOQUE CORREO -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Correo electrónico"
+                        android:textStyle="bold"
+                        android:textColor="@color/azul_fixly"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/texto_correo_cliente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="correo@ejemplo.com"
+                        android:textSize="16sp"
+                        android:textColor="@color/gris_texto"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <!-- DIVISOR -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gris_fondo"
+                    android:layout_marginHorizontal="16dp"/>
+
+                <!-- BLOQUE TELÉFONO -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Teléfono"
+                        android:textStyle="bold"
+                        android:textColor="@color/azul_fixly"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/texto_telefono_cliente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="000 000 00 00"
+                        android:textSize="16sp"
+                        android:textColor="@color/gris_texto"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/boton_editar_perfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/azul_claro_fixly"
+                android:text="Editar Perfil"
+                android:textAllCaps="false"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold"
+                app:cornerRadius="0dp" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/boton_cambiar_contraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="@color/azul_claro_fixly"
+                android:text="Cambiar contraseña"
+                android:textAllCaps="false"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold"
+                app:cornerRadius="0dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include layout="@layout/bottom_nav"/>
+
+</LinearLayout>

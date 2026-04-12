@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:background="@drawable/bg_registro">
 
+
     <ScrollView
         android:id="@+id/top_container"
         android:layout_width="match_parent"
@@ -32,33 +33,63 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="¡Hola proveedor!"
+                android:text="¡Registra un proveedor!"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
+            <!-- Nombre -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Nombre:"
                 android:textColor="@android:color/white" />
-
             <EditText
-                android:id="@+id/edittext_regiistro_proveedor_nombre"
+                android:id="@+id/edit_nombre_registro_proveedor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/white"
                 android:inputType="textPersonName"
                 android:textColor="@android:color/white" />
 
+            <!-- Apellido Paterno -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Apellido paterno:"
+                android:textColor="@android:color/white" />
+            <EditText
+                android:id="@+id/edit_apellido_p_registro_proveedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/white" />
+
+            <!-- Apellido Materno -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Apellido materno:"
+                android:textColor="@android:color/white" />
+            <EditText
+                android:id="@+id/edit_apellido_m_registro_proveedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/white" />
+
+            <!-- Correo -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Correo:"
                 android:textColor="@android:color/white" />
-
             <EditText
                 android:id="@+id/edittext_regiistro_proveedor_correo"
                 android:layout_width="match_parent"
@@ -67,13 +98,13 @@
                 android:inputType="textEmailAddress"
                 android:textColor="@android:color/white" />
 
+            <!-- Contraseña -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Contraseña:"
                 android:textColor="@android:color/white" />
-
             <EditText
                 android:id="@+id/edittext_regiistro_proveedor_contraseña"
                 android:layout_width="match_parent"
@@ -82,28 +113,43 @@
                 android:inputType="textPassword"
                 android:textColor="@android:color/white" />
 
+            <!-- Repite Contraseña -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Tipo de servicio:"
+                android:text="Repite la contraseña:"
                 android:textColor="@android:color/white" />
-
             <EditText
-                android:id="@+id/edittext_regiistro_proveedor_tiposervicio"
+                android:id="@+id/edittext_regiistro_proveedor_repite_contraseña"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/white"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:textColor="@android:color/white" />
 
+            <!-- Teléfono -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Teléfono:"
+                android:textColor="@android:color/white" />
+            <EditText
+                android:id="@+id/edittext_regiistro_proveedor_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                android:inputType="phone"
+                android:textColor="@android:color/white" />
+
+            <!-- Descripción -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Descripción:"
                 android:textColor="@android:color/white" />
-
             <EditText
                 android:id="@+id/edittext_regiistro_proveedor_descripcion"
                 android:layout_width="match_parent"
@@ -113,6 +159,38 @@
                 android:inputType="textMultiLine"
                 android:maxLines="4"
                 android:textColor="@android:color/white" />
+
+            <!-- Categoría (Desplegable) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Categoría:"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+            <Spinner
+                android:id="@+id/spinner_registro_proveedor_categoria"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@android:color/white" />
+
+            <!-- Servicios (Dinámico con Checkboxes) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Servicios:"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:id="@+id/container_servicios_checkboxes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
+                <!-- Los CheckBoxes se añadirán aquí programáticamente -->
+            </LinearLayout>
 
             <Button
                 android:id="@+id/button_regiistro_proveedor_registrarme"
@@ -124,7 +202,6 @@
                 android:textColor="#0D2E6E" />
 
         </LinearLayout>
-
     </ScrollView>
 
     <LinearLayout
