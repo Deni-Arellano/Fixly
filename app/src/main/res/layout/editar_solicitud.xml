@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_principal_editar_solicitud"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/header" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="Editar solicitud"
+                android:textColor="@color/azul_fixly"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Dirección"
+                android:textColor="@color/azul_fixly"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Calle -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calle"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_calle_editar_solicitud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_fixly"
+                android:text="Morelos"
+                android:textColor="@android:color/black" />
+
+            <!-- Fila: Números -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Número exterior"
+                        android:textColor="@color/azul_fixly"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edit_num_ext_editar_solicitud"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/azul_fixly"
+                        android:text="5"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Número interior"
+                        android:textColor="@color/azul_fixly"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edit_num_int_editar_solicitud"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/azul_fixly"
+                        android:text="A"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Colonia -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Colonia"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_colonia_editar_solicitud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_fixly"
+                android:text="Tuitán"
+                android:textColor="@android:color/black" />
+
+            <!-- Ciudad -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Ciudad"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_ciudad_editar_solicitud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_fixly"
+                android:text="Estado de México"
+                android:textColor="@android:color/black" />
+
+            <!-- Estado -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Estado"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_estado_editar_solicitud"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:backgroundTint="@color/azul_fixly"
+                android:entries="@array/estados_mexico" />
+
+            <!-- Código Postal -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Código postal"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_cp_editar_solicitud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_fixly"
+                android:text="99855"
+                android:textColor="@android:color/black" />
+
+            <!-- Referencia -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Referencia"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_referencia_editar_solicitud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_fixly"
+                android:text="Casa de dos pisos"
+                android:textColor="@android:color/black" />
+
+            <!-- Descripción -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Descripción del servicio"
+                android:textColor="@color/azul_fixly"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_descripcion_editar_solicitud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_fixly"
+                android:text="Reparación de una fuga de mi baño"
+                android:textColor="@android:color/black" />
+
+            <!-- BOTONES -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_guardar_edicion_solicitud"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/amarillo_fixly"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Guardar"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:cornerRadius="4dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancelar_edicion_solicitud"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="24dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Cancelar"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:cornerRadius="4dp"
+                app:strokeColor="@color/gris_texto"
+                app:strokeWidth="1dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/bottom_nav" />
+
+</LinearLayout>
