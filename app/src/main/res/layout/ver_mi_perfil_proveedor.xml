@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gris_fondo">
+
+    <include layout="@layout/header"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/contenedor_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mi perfil"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/azul_fixly"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"/>
+
+
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:background="@drawable/fondo_imagen_redondeada_perfil"
+                android:padding="4dp">
+
+                <ImageView
+                    android:id="@+id/imagen_proveedor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/imagen_redondeada"
+                    android:clipToOutline="true"
+                    android:src="@drawable/ic_usuario_placeholder"/>
+            </FrameLayout>
+
+
+            <TextView
+                android:id="@+id/texto_nombre_proveedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Carlos Aranzazu Bañuelos"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/azul_fixly"
+                android:gravity="center"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="20dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:elevation="3dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Correo"
+                        android:textStyle="bold"
+                        android:textColor="@color/azul_fixly"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/texto_correo_proveedor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="carlos.aran@gmail.com"
+                        android:textSize="16sp"
+                        android:textColor="@color/gris_texto"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gris_fondo"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Teléfono"
+                        android:textStyle="bold"
+                        android:textColor="@color/azul_fixly"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/texto_telefono_proveedor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="789 245 67 99"
+                        android:textSize="16sp"
+                        android:textColor="@color/gris_texto"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gris_fondo"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Descripción"
+                        android:textStyle="bold"
+                        android:textColor="@color/azul_fixly"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/texto_descripcion_proveedor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Profesional verificado, servicio de calidad"
+                        android:textSize="16sp"
+                        android:textColor="@color/gris_texto"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gris_fondo"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Servicios"
+                        android:textStyle="bold"
+                        android:textColor="@color/azul_fixly"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/texto_servicios_proveedor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="• Reparación de fugas&#10;• Instalación de tuberías&#10;• Destape de drenaje"
+                        android:textSize="16sp"
+                        android:textColor="@color/gris_texto"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Valoración"
+                android:textStyle="bold"
+                android:textColor="@color/azul_fixly"
+                android:layout_marginTop="20dp"/>
+
+            <RatingBar
+                android:id="@+id/rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:rating="4"
+                android:stepSize="0.5"
+                android:isIndicator="true"
+                android:layout_marginTop="8dp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comentarios"
+                android:textStyle="bold"
+                android:textColor="@color/azul_fixly"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id= "@+id/recycler_comentarios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/boton_editar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Editar perfil"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/azul_claro_fixly"
+                android:textColor="@color/azul_fixly"
+                app:cornerRadius="0dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/boton_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cambiar contraseña"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/azul_claro_fixly"
+                android:textColor="@color/azul_fixly"
+                app:cornerRadius="0dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include layout="@layout/bottom_nav_proveedor"/>
+
+</LinearLayout>
