@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@drawable/bg_registro">
 
-    <!-- 🔹 SCROLLVIEW PRINCIPAL -->
+
     <ScrollView
         android:id="@+id/top_container"
         android:layout_width="match_parent"
