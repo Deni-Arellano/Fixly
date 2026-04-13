@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout_principal_cambiar_contrasena"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
@@ -122,7 +122,7 @@
 
             <!-- BOTONES -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/boton_ver_item_solicitud"
+                android:id="@+id/boton_guardar_cambiar_contrasena"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="48dp"
@@ -136,7 +136,7 @@
                 app:cornerRadius="4dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/boton_cancelar_cambio_cambiar_contrasena"
+                android:id="@+id/boton_cancelar_cambiar_contrasena"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

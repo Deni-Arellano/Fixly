@@ -36,7 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                         header.getPaddingRight(),
                         header.getPaddingBottom()
                 );
-                
+
 
                 ViewGroup.LayoutParams params = header.getLayoutParams();
                 int baseHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, getResources().getDisplayMetrics());
@@ -52,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                         bottom.getPaddingRight(),
                         systemBars.bottom
                 );
-                
+
                 ViewGroup.LayoutParams params = bottom.getLayoutParams();
                 int baseHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, getResources().getDisplayMetrics());
                 params.height = baseHeight + systemBars.bottom;

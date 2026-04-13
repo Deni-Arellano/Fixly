@@ -26,6 +26,12 @@
         <activity android:name=".InicioActivity" android:label="Inicio" />
         <activity android:name=".ListaServiciosActivity" android:label="Lista de Servicios" />
         <activity android:name=".PerfilProveedorActivity" android:label="Perfil del Proveedor" />
+        <activity android:name=".PerfilClienteActivity" android:label="Perfil" />
+        <activity android:name=".EditarPerfilClienteActivity" android:label="Editar Perfil" />
+        <activity android:name=".CambiarContrasenaActivity" android:label="Cambiar Contraseña" />
+        <activity android:name=".HistorialSolicitudesActivity" android:label="Historial de Solicitudes" />
+        <activity android:name=".VerSolicitudActivity" android:label="Ver Solicitud" />
+        <activity android:name=".EditarSolicitudActivity" android:label="Editar Solicitud" />
     </application>
 
 </manifest>

@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout_principal_perfil_cliente"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -123,7 +123,7 @@
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/boton_editar_perfil"
+                android:id="@+id/boton_editar_perfil_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -136,7 +136,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/boton_cambiar_contraseña"
+                android:id="@+id/boton_cambiar_contraseña_perfil_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
