@@ -52,8 +52,7 @@ public class PerfilClienteActivity extends BaseActivity {
         btnPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PerfilClienteActivity.this, PerfilClienteActivity.class);
-                startActivity(intent);
+                // Ya estamos en Perfil
             }
         });
 

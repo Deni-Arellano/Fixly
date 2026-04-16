@@ -82,7 +82,7 @@ public class RegistroProveedorActivity extends AppCompatActivity {
         if (btnRegistrarme != null) {
             btnRegistrarme.setOnClickListener(view -> {
                 Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RegistroProveedorActivity.this, InicioActivity.class);
+                Intent intent = new Intent(RegistroProveedorActivity.this, SolicitudesProveedorActivity.class);
                 startActivity(intent);
             });
         }

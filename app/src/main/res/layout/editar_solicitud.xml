@@ -157,7 +157,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/azul_fixly"
-                android:entries="@array/estados_mexico" />
+                android:entries="@array/estados_mexico"
+                android:theme="@style/Theme.AppCompat.Light" />
 
             <!-- Código Postal -->
             <TextView
