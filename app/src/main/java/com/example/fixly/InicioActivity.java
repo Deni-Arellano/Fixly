@@ -98,10 +98,10 @@ public class InicioActivity extends BaseActivity {
 
         View btnInicio = findViewById(R.id.home_barra_navegacion);
         btnInicio.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InicioActivity.this, InicioActivity.class);
-                startActivity(intent);
+                // Ya estamos en Inicio
             }
         });
 

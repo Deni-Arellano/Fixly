@@ -32,6 +32,7 @@
         <activity android:name=".HistorialSolicitudesActivity" android:label="Historial de Solicitudes" />
         <activity android:name=".VerSolicitudActivity" android:label="Ver Solicitud" />
         <activity android:name=".EditarSolicitudActivity" android:label="Editar Solicitud" />
+        <activity android:name=".CalificarServicio" android:label="Calificar Servicio" />
     </application>
 
 </manifest>
