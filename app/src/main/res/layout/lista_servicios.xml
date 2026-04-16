@@ -28,6 +28,8 @@
             android:textSize="18sp"
             android:padding="16dp"/>
 
+        <include layout="@layout/item_proveedor"/>
+
         <!-- Lista de todos los proveedores que va a crecer  -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lista_proveedores"
