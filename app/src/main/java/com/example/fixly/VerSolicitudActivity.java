@@ -34,7 +34,7 @@ public class VerSolicitudActivity extends BaseActivity {
             btnCalificar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(VerSolicitudActivity.this, CalificarServicio.class);
+                    Intent intent = new Intent(VerSolicitudActivity.this, CalificarServicioActivity.class);
                     startActivity(intent);
                 }
             });
