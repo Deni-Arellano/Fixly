@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clipChildren="false">
+
+    <include layout="@layout/header"/>
+
+    <EditText
+        android:id="@+id/etBuscarUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_search_bar"
+        android:hint="Buscar"
+        android:inputType="text"
+        android:paddingHorizontal="20dp"
+        android:textColorHint="#757575"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/header_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Lista de usuarios (Scrollable) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUsuarios"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:paddingBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etBuscarUsuario"
+        tools:listitem="@layout/item_usuario_admin" />
+
+    <!-- Navbar blanco fijo abajo -->
+    <View
+        android:id="@+id/bottom_nav_admin"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/white"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- Botón Agregar (+) sobre el Navbar -->
+    <ImageButton
+        android:id="@+id/btnAgregarUsuario"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@drawable/bg_circle_yellow"
+        android:contentDescription="Agregar usuario"
+        android:elevation="12dp"
+        android:src="@drawable/ic_add_black"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_admin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bottom_nav_admin"
+        app:tint="@color/black" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
