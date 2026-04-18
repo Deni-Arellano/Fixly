@@ -2,6 +2,8 @@ package com.example.fixly;
 
 import android.os.Bundle;
 import androidx.recyclerview.widget.RecyclerView;
+import android.content.Intent;
+import android.view.View;
 
 public class ListaServiciosActivity extends BaseActivity {
     @Override
@@ -13,6 +15,56 @@ public class ListaServiciosActivity extends BaseActivity {
         // Reference the RecyclerView defined in lista_servicios.xml
         RecyclerView recyclerView = findViewById(R.id.lista_proveedores);
 
-        // TODO: Set up the RecyclerView with an adapter to show the list of providers
+        // SELECCION DEL PERFIL DEL PROVVEDOR
+        View tarjeta = findViewById(R.id.item_proveedor);
+
+        tarjeta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaServiciosActivity.this, PerfilProveedorActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // --- NAVEGACIÓN INFERIOR ---
+
+        View btnHistorial = findViewById(R.id.historial_barra_navegacion);
+        btnHistorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaServiciosActivity.this, HistorialSolicitudesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        View btnInicio = findViewById(R.id.home_barra_navegacion);
+        if (btnInicio != null) {
+            btnInicio.setOnClickListener(v -> {
+                Intent intent = new Intent(ListaServiciosActivity.this, InicioActivity.class);
+                startActivity(intent);
+            });
+        }
+
+
+        View btnPerfil = findViewById(R.id.perfil_barra_navegacion);
+        btnPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaServiciosActivity.this, PerfilClienteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // --- HEADER ---
+
+        View btnSalir = findViewById(R.id.imageView);
+        btnSalir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaServiciosActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

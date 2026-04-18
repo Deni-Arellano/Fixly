@@ -34,6 +34,7 @@
         <activity android:name=".EditarSolicitudActivity" android:label="Editar Solicitud" />
         <activity android:name=".CalificarServicioActivity" android:label="Calificar Servicio" />
         <activity android:name=".SolicitudesProveedorActivity" android:label="Solicitudes Proveedor" />
+        <activity android:name=".SolicitarServicioActivity" android:label="Solicitar Servicio"/>
     </application>
 
 </manifest>
