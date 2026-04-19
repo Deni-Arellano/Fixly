@@ -35,6 +35,10 @@
         <activity android:name=".CalificarServicioActivity" android:label="Calificar Servicio" />
         <activity android:name=".SolicitudesProveedorActivity" android:label="Solicitudes Proveedor" />
         <activity android:name=".SolicitarServicioActivity" android:label="Solicitar Servicio"/>
+        <activity android:name=".MiPerfilProveedorActivity" android:label="Ver Mi Perfil Proveedor"/>
+        <activity android:name=".VerSolicitudProveedorActivity" android:label="Ver Solicitud Proveedor"/>
+        <activity android:name=".CambiarContrasenaProveedorActivity" android:label="Cambiar Contraseña Proveedor"/>
+        <activity android:name=".EditarPerfilProveedorActivity" android:label="Editar Perfil Proveedor"/>
     </application>
 
 </manifest>
