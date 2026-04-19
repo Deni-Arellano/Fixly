@@ -39,6 +39,7 @@
         <activity android:name=".VerSolicitudProveedorActivity" android:label="Ver Solicitud Proveedor"/>
         <activity android:name=".CambiarContrasenaProveedorActivity" android:label="Cambiar Contraseña Proveedor"/>
         <activity android:name=".EditarPerfilProveedorActivity" android:label="Editar Perfil Proveedor"/>
+        <activity android:name=".AdministradorUsuariosActivity" android:label="Menu Administrador" />
     </application>
 
 </manifest>
