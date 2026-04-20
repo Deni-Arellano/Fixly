@@ -21,7 +21,6 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,7 +30,6 @@
                 android:textColor="@color/azul_fixly"
                 android:layout_marginBottom="20dp"/>
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,12 +38,12 @@
                 android:textColor="@color/azul_fixly"
                 android:layout_marginBottom="15dp"/>
 
-            <!-- CALLE -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Calle"
-                android:textColor="#000000"
+                android:textColor="@android:color/black"
                 android:textSize="14sp"/>
 
             <EditText
@@ -53,6 +51,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#0D3B66"
+                android:textColor="@android:color/black"
+                android:textColorHint="#808080"
+                android:textSize="14sp"
                 android:layout_marginBottom="12dp"/>
 
 
@@ -73,13 +74,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="No. exterior"
+                        android:textColor="@android:color/black"
                         android:textSize="14sp"/>
 
                     <EditText
                         android:id="@+id/input_numero_exterior"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#0D3B66"/>
+                        android:backgroundTint="#0D3B66"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="#808080"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -92,13 +97,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="No. interior"
+                        android:textColor="@android:color/black"
                         android:textSize="14sp"/>
 
                     <EditText
                         android:id="@+id/input_numero_interior"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#0D3B66"/>
+                        android:backgroundTint="#0D3B66"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="#808080"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -108,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Colonia"
-                android:textColor="#000000"
+                android:textColor="@android:color/black"
                 android:textSize="14sp"/>
 
             <EditText
@@ -116,13 +125,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#0D3B66"
+                android:textColor="@android:color/black"
+                android:textColorHint="#808080"
+                android:textSize="14sp"
                 android:layout_marginBottom="12dp"/>
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ciudad"
-                android:textColor="#000000"
+                android:textColor="@android:color/black"
                 android:textSize="14sp"/>
 
             <EditText
@@ -130,14 +143,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#0D3B66"
+                android:textColor="@android:color/black"
+                android:textColorHint="#808080"
+                android:textSize="14sp"
                 android:layout_marginBottom="12dp"/>
 
-            <!-- ESTADO -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Estado"
-                android:textColor="#000000"
+                android:textColor="@android:color/black"
                 android:textSize="14sp"/>
 
             <Spinner
@@ -153,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Código postal"
-                android:textColor="#000000"
+                android:textColor="@android:color/black"
                 android:textSize="14sp"/>
 
             <EditText
@@ -162,6 +178,9 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:backgroundTint="#0D3B66"
+                android:textColor="@android:color/black"
+                android:textColorHint="#808080"
+                android:textSize="14sp"
                 android:layout_marginBottom="12dp"/>
 
 
@@ -169,7 +188,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Referencia"
-                android:textColor="#000000"
+                android:textColor="@android:color/black"
                 android:textSize="14sp"/>
 
             <EditText
@@ -177,6 +196,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#0D3B66"
+                android:textColor="@android:color/black"
+                android:textColorHint="#808080"
+                android:textSize="14sp"
                 android:layout_marginBottom="20dp"/>
 
 
@@ -197,12 +219,14 @@
                 <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Reparación de fugas"/>
+                    android:text="Reparación de fugas"
+                    android:textColor="@android:color/black"/>
 
                 <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Instalación de tubería"/>
+                    android:text="Instalación de tubería"
+                    android:textColor="@android:color/black"/>
 
             </RadioGroup>
 
@@ -219,6 +243,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#0D3B66"
+                android:textColor="@android:color/black"
+                android:textColorHint="#808080"
+                android:textSize="14sp"
                 android:layout_marginBottom="30dp"/>
 
 
@@ -231,13 +258,7 @@
                 android:textColor="@color/azul_fixly"
                 android:textStyle="bold"/>
 
-            <Button
-                android:id="@+id/boton_cancelar_servicio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cancelar"
-                android:backgroundTint="#E0E0E0"
-                android:textColor="@color/azul_fixly"/>
+
 
         </LinearLayout>
 

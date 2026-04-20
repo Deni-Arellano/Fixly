@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <include layout="@layout/header"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/contenedor_contenido_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- TITULO -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:text="Editar perfil"
+                android:textColor="@color/azul_medio_fixly"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <!-- FOTO -->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="32dp">
+
+                <FrameLayout
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:background="@drawable/fondo_imagen_redondeada_perfil"
+                    android:padding="4dp">
+
+                    <ImageView
+                        android:id="@+id/imagen_editar_perfil_proveedor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/imagen_redondeada"
+                        android:clipToOutline="true"
+                        android:src="@drawable/ic_usuario_placeholder"/>
+                </FrameLayout>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_cambiar_foto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="8dp"
+                    android:src="@android:drawable/ic_menu_camera"
+                    app:fabSize="mini"
+                    app:backgroundTint="@color/azul_fixly"
+                    app:tint="@color/amarillo_fixly"
+                    app:elevation="4dp"/>
+            </FrameLayout>
+
+            <!-- NOMBRE -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre:"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/edit_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_fixly"
+                android:textColor="@android:color/black"
+                android:text="Carlos"/>
+
+            <!-- APELLIDO PATERNO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellido paterno:"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/edit_apellido_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_fixly"
+                android:textColor="@android:color/black"
+                android:text="Aranzazu"/>
+
+            <!-- APELLIDO MATERNO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellido materno:"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/edit_apellido_m"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_fixly"
+                android:textColor="@android:color/black"
+                android:text="Bañuelos"/>
+
+            <!-- CORREO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correo:"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/edit_correo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_fixly"
+                android:textColor="@android:color/black"
+                android:inputType="textEmailAddress"
+                android:text="correo@gmail.com"/>
+
+            <!-- TELEFONO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teléfono:"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/edit_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_fixly"
+                android:textColor="@android:color/black"
+                android:inputType="phone"
+                android:text="7892456799"/>
+
+            <!-- DESCRIPCION -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción:"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/edit_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/azul_fixly"
+                android:textColor="@android:color/black"
+                android:lines="2"
+                android:text="Profesional verificado"/>
+
+            <!-- SERVICIOS -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Servicios:"
+                android:textColor="@color/azul_fixly"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"/>
+
+            <LinearLayout
+                android:id="@+id/contenedor_servicios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"/>
+
+            <!-- BOTONES -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/boton_guardar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/amarillo_fixly"
+                android:text="Guardar"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:cornerRadius="4dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="24dp"
+                android:text="Cancelar"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:cornerRadius="4dp"
+                app:strokeColor="@color/gris_texto"
+                app:strokeWidth="1dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/bottom_nav_proveedor"/>
+
+</LinearLayout>
