@@ -5,12 +5,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.fixly.network.RetrofitClient;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,15 +38,11 @@ public class MainActivity extends AppCompatActivity {
         View topContainer = findViewById(R.id.top_container);
         View bottomContainer = findViewById(R.id.bottom_container);
 
-
         originalTopPadding = topContainer.getPaddingTop();
         originalBottomPadding = bottomContainer.getPaddingBottom();
 
         ViewCompat.setOnApplyWindowInsetsListener(main, (v, insets) -> {
-            Insets systemBars = insets.getInsets(
-                    WindowInsetsCompat.Type.systemBars()
-            );
-
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
 
             topContainer.setPadding(
                     topContainer.getPaddingLeft(),
@@ -55,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Probar conexión al backend al iniciar
+        probarConexionBackend();
 
         Button btnIngresar = findViewById(R.id.boton_ingresar_login);
         btnIngresar.setOnClickListener(view -> {
@@ -62,11 +70,33 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
         TextView tvRegistrarse = findViewById(R.id.textview_registrarse_login);
         tvRegistrarse.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, RegistroClienteActivity.class);
             startActivity(intent);
+        });
+    }
+
+    private void probarConexionBackend() {
+        RetrofitClient.getApiService().checkStatus().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    try {
+                        String mensaje = response.body().string();
+                        Toast.makeText(MainActivity.this, mensaje, Toast.LENGTH_LONG).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Fallo al conectar: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
         });
     }
 }
