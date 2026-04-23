@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.fixly.models.login.LoginRequest;
+import com.example.fixly.models.login.LoginResponse;
 import com.example.fixly.network.RetrofitClient;
 
 import java.io.IOException;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int originalTopPadding;
     private int originalBottomPadding;
+    private EditText inputCorreo, inputPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         View main = findViewById(R.id.main);
         View topContainer = findViewById(R.id.top_container);
         View bottomContainer = findViewById(R.id.bottom_container);
+
+        inputCorreo = findViewById(R.id.input_correo_login);
+        inputPassword = findViewById(R.id.input_contraseña_login);
 
         originalTopPadding = topContainer.getPaddingTop();
         originalBottomPadding = bottomContainer.getPaddingBottom();
@@ -66,14 +73,53 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnIngresar = findViewById(R.id.boton_ingresar_login);
         btnIngresar.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, InicioActivity.class);
-            startActivity(intent);
+            String correo = inputCorreo.getText().toString().trim();
+            String password = inputPassword.getText().toString().trim();
+
+            if (correo.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Por favor llena todos los campos", Toast.LENGTH_SHORT).show();
+            } else {
+                loginUsuario(correo, password);
+            }
         });
 
         TextView tvRegistrarse = findViewById(R.id.textview_registrarse_login);
         tvRegistrarse.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, RegistroClienteActivity.class);
             startActivity(intent);
+        });
+    }
+
+    private void loginUsuario(String email, String password) {
+        LoginRequest loginRequest = new LoginRequest(email, password);
+        
+        RetrofitClient.getApiService().login(loginRequest).enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(MainActivity.this, "¡Bienvenido! " + (response.body().getMessage() != null ? response.body().getMessage() : ""), Toast.LENGTH_SHORT).show();
+                    
+                    Intent intent = new Intent(MainActivity.this, InicioActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                    String errorMsg = "Credenciales incorrectas";
+                    try {
+                        if (response.errorBody() != null) {
+                            errorMsg = response.errorBody().string();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(MainActivity.this, "Error: " + errorMsg, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error de red: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
         });
     }
 
@@ -84,18 +130,16 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     try {
                         String mensaje = response.body().string();
-                        Toast.makeText(MainActivity.this, mensaje, Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Backend conectado", Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                } else {
-                    Toast.makeText(MainActivity.this, "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Fallo al conectar: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                // Silencioso
             }
         });
     }
