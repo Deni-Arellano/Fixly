@@ -1,31 +1,49 @@
 package com.example.fixly.models.login;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LoginResponse {
-    private String token;
-    private String message;
-    private String role;
+    @SerializedName("codigo")
+    private int codigo;
 
-    public String getToken() {
-        return token;
+    @SerializedName("mensaje")
+    private String mensaje;
+
+    @SerializedName("datos")
+    private Datos datos;
+
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public String getMensaje() {
+        return mensaje;
     }
 
-    public String getMessage() {
-        return message;
+    public Datos getDatos() {
+        return datos;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    public static class Datos {
+        @SerializedName("id_usuario")
+        private int idUsuario;
 
-    public String getRole() {
-        return role;
-    }
+        @SerializedName("id_rol")
+        private int idRol;
 
-    public void setRole(String role) {
-        this.role = role;
+        @SerializedName("accessToken")
+        private String accessToken;
+
+        public int getIdUsuario() {
+            return idUsuario;
+        }
+
+        public int getIdRol() {
+            return idRol;
+        }
+
+        public String getAccessToken() {
+            return accessToken;
+        }
     }
 }

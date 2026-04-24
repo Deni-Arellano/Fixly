@@ -1,6 +1,7 @@
 package com.example.fixly;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -97,22 +98,36 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(MainActivity.this, "¡Bienvenido! " + (response.body().getMessage() != null ? response.body().getMessage() : ""), Toast.LENGTH_SHORT).show();
+                    LoginResponse loginResponse = response.body();
                     
-                    Intent intent = new Intent(MainActivity.this, InicioActivity.class);
-                    startActivity(intent);
-                    finish();
+                    String mensaje = loginResponse.getMensaje() != null ? loginResponse.getMensaje() : "Bienvenido";
+                    Toast.makeText(MainActivity.this, mensaje, Toast.LENGTH_SHORT).show();
 
-                } else {
-                    String errorMsg = "Credenciales incorrectas";
-                    try {
-                        if (response.errorBody() != null) {
-                            errorMsg = response.errorBody().string();
+                    if (loginResponse.getDatos() != null) {
+                        guardarDatosSesion(loginResponse.getDatos());
+
+                        int idRol = loginResponse.getDatos().getIdRol();
+                        Intent intent;
+
+                        switch (idRol) {
+                            case 1:
+                                intent = new Intent(MainActivity.this, AdministradorUsuariosActivity.class);
+                                break;
+                            case 2:
+                                intent = new Intent(MainActivity.this, SolicitudesProveedorActivity.class);
+                                break;
+                            case 3:
+                                intent = new Intent(MainActivity.this, InicioActivity.class);
+                                break;
+                            default:
+                                intent = new Intent(MainActivity.this, InicioActivity.class);
+                                break;
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        startActivity(intent);
+                        finish();
                     }
-                    Toast.makeText(MainActivity.this, "Error: " + errorMsg, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -123,24 +138,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void guardarDatosSesion(LoginResponse.Datos datos) {
+        SharedPreferences preferences = getSharedPreferences("fixly_sesion", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putInt("id_usuario", datos.getIdUsuario());
+        editor.putInt("id_rol", datos.getIdRol());
+        editor.putString("access_token", datos.getAccessToken());
+        editor.apply();
+    }
+
     private void probarConexionBackend() {
         RetrofitClient.getApiService().checkStatus().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    try {
-                        String mensaje = response.body().string();
-                        Toast.makeText(MainActivity.this, "Backend conectado", Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    Toast.makeText(MainActivity.this, "Backend conectado", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                // Silencioso
-            }
+            public void onFailure(Call<ResponseBody> call, Throwable t) { }
         });
     }
 }
