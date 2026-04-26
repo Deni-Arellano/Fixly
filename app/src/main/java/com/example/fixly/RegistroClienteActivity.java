@@ -16,6 +16,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.fixly.models.registroCliente.RegistroRequest;
 import com.example.fixly.models.registroCliente.RegistroResponse;
 import com.example.fixly.network.RetrofitClient;
+import com.google.gson.Gson;
+
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -114,11 +117,23 @@ public class RegistroClienteActivity extends AppCompatActivity {
                         finish();
                     }
                 } else {
-                    String errorMsg = "Error en el registro";
-                    if (response.code() == 409) {
-                        errorMsg = "El correo ya está registrado";
+                    try {
+                        String errorJson = response.errorBody().string();
+                        RegistroResponse errorRes = new Gson().fromJson(errorJson, RegistroResponse.class);
+                        
+                        if (errorRes != null && errorRes.getCodigo() == 422 && errorRes.getErrores() != null) {
+                            Toast.makeText(RegistroClienteActivity.this, errorRes.getMensaje(), Toast.LENGTH_LONG).show();
+
+                            for (Map.Entry<String, String> entry : errorRes.getErrores().entrySet()) {
+                                mostrarErrorEnInput(entry.getKey(), entry.getValue());
+                            }
+                        } else {
+                            String msg = (errorRes != null) ? errorRes.getMensaje() : "Error en el registro";
+                            Toast.makeText(RegistroClienteActivity.this, msg, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(RegistroClienteActivity.this, "Error al procesar validación", Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(RegistroClienteActivity.this, errorMsg, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -127,5 +142,25 @@ public class RegistroClienteActivity extends AppCompatActivity {
                 Toast.makeText(RegistroClienteActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void mostrarErrorEnInput(String campo, String mensaje) {
+        switch (campo) {
+            case "correo":
+                inputCorreo.setError(mensaje);
+                break;
+            case "telefono":
+                inputTelefono.setError(mensaje);
+                break;
+            case "nombre":
+                inputNombre.setError(mensaje);
+                break;
+            case "apellido_paterno":
+                inputApellidoP.setError(mensaje);
+                break;
+            case "password":
+                inputPassword.setError(mensaje);
+                break;
+        }
     }
 }
