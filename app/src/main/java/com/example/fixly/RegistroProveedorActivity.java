@@ -1,12 +1,14 @@
 package com.example.fixly;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -21,10 +23,15 @@ import com.example.fixly.models.catalogos.Categoria;
 import com.example.fixly.models.catalogos.CategoriasResponse;
 import com.example.fixly.models.catalogos.Servicio;
 import com.example.fixly.models.catalogos.ServiciosResponse;
+import com.example.fixly.models.registroCliente.RegistroRequest;
+import com.example.fixly.models.registroProveedor.RegistroProveedorRequest;
+import com.example.fixly.models.registroProveedor.RegistroProveedorResponse;
 import com.example.fixly.network.RetrofitClient;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +41,9 @@ public class RegistroProveedorActivity extends AppCompatActivity {
 
     private Spinner spinnerCategoria;
     private LinearLayout containerServicios;
+    private EditText inputNombre, inputApellidoP, inputApellidoM, inputCorreo, inputPassword, inputRepetirPassword, inputTelefono, inputDescripcion;
     private List<Categoria> listaCategorias = new ArrayList<>();
+    private final String nombreRegex = "^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' .-]+$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +51,23 @@ public class RegistroProveedorActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.registro_proveedor);
 
-        // Inicializar vistas
+        inputNombre = findViewById(R.id.edit_nombre_registro_proveedor);
+        inputApellidoP = findViewById(R.id.edit_apellido_p_registro_proveedor);
+        inputApellidoM = findViewById(R.id.edit_apellido_m_registro_proveedor);
+        inputCorreo = findViewById(R.id.edittext_regiistro_proveedor_correo);
+        inputPassword = findViewById(R.id.edittext_regiistro_proveedor_contraseña);
+        inputRepetirPassword = findViewById(R.id.edittext_regiistro_proveedor_repite_contraseña);
+        inputTelefono = findViewById(R.id.edittext_regiistro_proveedor_telefono);
+        inputDescripcion = findViewById(R.id.edittext_regiistro_proveedor_descripcion);
+        
         spinnerCategoria = findViewById(R.id.spinner_registro_proveedor_categoria);
         containerServicios = findViewById(R.id.container_servicios_checkboxes);
         Button btnRegistrarme = findViewById(R.id.button_regiistro_proveedor_registrarme);
+        
         View main = findViewById(R.id.main);
         View topContainer = findViewById(R.id.top_container);
         View bottomContainer = findViewById(R.id.bottom_container);
 
-        // Configurar Insets
         ViewCompat.setOnApplyWindowInsetsListener(main, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             if (topContainer != null) {
@@ -77,12 +94,9 @@ public class RegistroProveedorActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        // Botón registrar
         if (btnRegistrarme != null) {
             btnRegistrarme.setOnClickListener(view -> {
-                Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RegistroProveedorActivity.this, SolicitudesProveedorActivity.class);
-                startActivity(intent);
+                validarYRegistrar();
             });
         }
     }
@@ -112,7 +126,6 @@ public class RegistroProveedorActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ServiciosResponse> call, Response<ServiciosResponse> response) {
                 containerServicios.removeAllViews();
-                
                 if (response.isSuccessful() && response.body() != null) {
                     List<Servicio> servicios = response.body().getDatos();
                     for (Servicio servicio : servicios) {
@@ -122,15 +135,165 @@ public class RegistroProveedorActivity extends AppCompatActivity {
                         cb.setTextColor(getResources().getColor(android.R.color.white));
                         containerServicios.addView(cb);
                     }
-                } else {
-                    Toast.makeText(RegistroProveedorActivity.this, "Error al obtener servicios", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ServiciosResponse> call, Throwable t) {
-                Toast.makeText(RegistroProveedorActivity.this, "Error de red al cargar servicios", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<ServiciosResponse> call, Throwable t) {}
+        });
+    }
+
+    private void validarYRegistrar() {
+        String nombre = inputNombre.getText().toString().trim();
+        String apellidoP = inputApellidoP.getText().toString().trim();
+        String apellidoM = inputApellidoM.getText().toString().trim();
+        String correo = inputCorreo.getText().toString().trim();
+        String password = inputPassword.getText().toString().trim();
+        String repetirPassword = inputRepetirPassword.getText().toString().trim();
+        String telefono = inputTelefono.getText().toString().trim();
+        String descripcion = inputDescripcion.getText().toString().trim();
+
+        if (nombre.isEmpty() || apellidoP.isEmpty() || correo.isEmpty() || password.isEmpty() || telefono.isEmpty() || descripcion.isEmpty()) {
+            Toast.makeText(this, "Por favor llena los campos obligatorios", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        boolean banderaError = false;
+
+        if (nombre.length() < 2) {
+            inputNombre.setError("El nombre debe tener al menos 2 caracteres");
+            banderaError = true;
+        } else if (nombre.length() > 100) {
+            inputNombre.setError("El nombre no puede superar los 100 caracteres");
+            banderaError = true;
+        } else if (!nombre.matches(nombreRegex)) {
+            inputNombre.setError("Solo se permiten letras, espacios, acentos, ñ, guion, apóstrofe y punto");
+            banderaError = true;
+        }
+
+        if (apellidoP.length() < 2) {
+            inputApellidoP.setError("El apellido paterno debe tener al menos 2 caracteres");
+            banderaError = true;
+        } else if (apellidoP.length() > 100) {
+            inputApellidoP.setError("El apellido paterno no puede superar los 100 caracteres");
+            banderaError = true;
+        } else if (!apellidoP.matches(nombreRegex)) {
+            inputApellidoP.setError("Solo se permiten letras, espacios, acentos, ñ, guion, apóstrofe y punto");
+            banderaError = true;
+        }
+
+        if (!apellidoM.isEmpty()) {
+            if (apellidoM.length() < 2) {
+                inputApellidoM.setError("El apellido materno debe tener al menos 2 caracteres");
+                banderaError = true;
+            } else if (apellidoM.length() > 100) {
+                inputApellidoM.setError("El apellido materno no puede superar los 100 caracteres");
+                banderaError = true;
+            } else if (!apellidoM.matches(nombreRegex)) {
+                inputApellidoM.setError("Solo se permiten letras, espacios, acentos, ñ, guion, apóstrofe y punto");
+                banderaError = true;
+            }
+        }
+
+        if (!password.equals(repetirPassword)) {
+            inputRepetirPassword.setError("Las contraseñas no coinciden");
+            banderaError = true;
+        }
+
+        if (banderaError) {
+            Toast.makeText(this, "Errores de validación.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        List<Integer> serviciosSeleccionados = new ArrayList<>();
+        for (int i = 0; i < containerServicios.getChildCount(); i++) {
+            View v = containerServicios.getChildAt(i);
+            if (v instanceof CheckBox) {
+                CheckBox cb = (CheckBox) v;
+                if (cb.isChecked()) {
+                    serviciosSeleccionados.add((Integer) cb.getTag());
+                }
+            }
+        }
+
+        if (serviciosSeleccionados.isEmpty()) {
+            Toast.makeText(this, "Debes seleccionar al menos un servicio", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Categoria cat = (Categoria) spinnerCategoria.getSelectedItem();
+        if (cat == null) {
+            Toast.makeText(this, "Selecciona una categoría válida", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        RegistroRequest usuario = new RegistroRequest(nombre, apellidoP, apellidoM, correo, password, telefono);
+        RegistroProveedorRequest.DatosPrestador datosPrestador = new RegistroProveedorRequest.DatosPrestador(descripcion, cat.getId(), serviciosSeleccionados);
+        RegistroProveedorRequest request = new RegistroProveedorRequest(usuario, datosPrestador);
+
+        enviarRegistro(request);
+    }
+
+    private void enviarRegistro(RegistroProveedorRequest request) {
+        SharedPreferences preferences = getSharedPreferences("fixly_sesion", MODE_PRIVATE);
+        String token = "Bearer " + preferences.getString("access_token", "");
+
+        RetrofitClient.getApiService().registrarPrestador(token, request).enqueue(new Callback<RegistroProveedorResponse>() {
+            @Override
+            public void onResponse(Call<RegistroProveedorResponse> call, Response<RegistroProveedorResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(RegistroProveedorActivity.this, response.body().getMensaje(), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(RegistroProveedorActivity.this, AdministradorUsuariosActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    try {
+                        String errorJson = response.errorBody().string();
+                        RegistroProveedorResponse errorRes = new Gson().fromJson(errorJson, RegistroProveedorResponse.class);
+                        
+                        if (errorRes != null && errorRes.getCodigo() == 422 && errorRes.getErrores() != null) {
+                            Toast.makeText(RegistroProveedorActivity.this, "Errores de validación.", Toast.LENGTH_SHORT).show();
+                            for (Map.Entry<String, String> entry : errorRes.getErrores().entrySet()) {
+                                mostrarErrorEnInput(entry.getKey(), entry.getValue());
+                            }
+                        } else {
+                            String msg = (errorRes != null) ? errorRes.getMensaje() : "Error en el registro";
+                            Toast.makeText(RegistroProveedorActivity.this, msg, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(RegistroProveedorActivity.this, "Error al procesar registro", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegistroProveedorResponse> call, Throwable t) {
+                Toast.makeText(RegistroProveedorActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void mostrarErrorEnInput(String campo, String mensaje) {
+        String msgLower = mensaje.toLowerCase();
+
+        if (campo.equals("usuario")) {
+            if (msgLower.contains("teléfono") || msgLower.contains("10 y 15 dígitos")) {
+                inputTelefono.setError(mensaje);
+            } else if (msgLower.contains("correo")) {
+                inputCorreo.setError(mensaje);
+            } else if (msgLower.contains("apellido paterno")) {
+                inputApellidoP.setError(mensaje);
+            } else if (msgLower.contains("apellido materno")) {
+                inputApellidoM.setError(mensaje);
+            } else if (msgLower.contains("mayúscula") || msgLower.contains("carácter especial")) {
+                inputPassword.setError(mensaje);
+            } else if (msgLower.contains("nombre") && !msgLower.contains("apellido")) {
+                inputNombre.setError(mensaje);
+            }
+        } else if (campo.equals("datos_prestador")) {
+            if (msgLower.contains("descripción") || msgLower.contains("obligatoria")) {
+                inputDescripcion.setError(mensaje);
+            }
+        }
     }
 }
