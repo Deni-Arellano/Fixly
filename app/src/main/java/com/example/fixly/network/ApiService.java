@@ -1,5 +1,6 @@
 package com.example.fixly.network;
 
+import com.example.fixly.models.catalogos.CategoriasResponse;
 import com.example.fixly.models.login.LoginRequest;
 import com.example.fixly.models.login.LoginResponse;
 import com.example.fixly.models.registroCliente.RegistroRequest;
@@ -20,4 +21,7 @@ public interface ApiService {
 
     @POST("users/registrarCliente")
     Call<RegistroResponse> registrarCliente(@Body RegistroRequest registroRequest);
+
+    @GET("catalogs/categorias")
+    Call<CategoriasResponse> getCategorias();
 }

@@ -17,16 +17,22 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.fixly.models.catalogos.Categoria;
+import com.example.fixly.models.catalogos.CategoriasResponse;
+import com.example.fixly.network.RetrofitClient;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegistroProveedorActivity extends AppCompatActivity {
 
     private Spinner spinnerCategoria;
     private LinearLayout containerServicios;
-    private Map<String, String[]> datosServicios;
+    private List<Categoria> listaCategorias = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,22 +62,13 @@ public class RegistroProveedorActivity extends AppCompatActivity {
             return insets;
         });
 
-        // 1. Preparar datos de ejemplo (Esto vendrá de tu BD después)
-        prepararDatosEjemplo();
+        obtenerCategorias();
 
-        // 2. Configurar el Spinner de Categorías
-        List<String> categorias = new ArrayList<>(datosServicios.keySet());
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, categorias);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCategoria.setAdapter(adapter);
-
-        // 3. Listener para cambios en la categoría
         spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String categoriaSeleccionada = categorias.get(position);
-                actualizarServicios(categoriaSeleccionada);
+                containerServicios.removeAllViews();
+                Toast.makeText(RegistroProveedorActivity.this, "Seleccionaste: " + listaCategorias.get(position).getNombre(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -88,33 +85,25 @@ public class RegistroProveedorActivity extends AppCompatActivity {
         }
     }
 
-    private void prepararDatosEjemplo() {
-        datosServicios = new HashMap<>();
-        datosServicios.put("Jardinería", new String[]{
-                "Corte de césped", "Poda de árboles", "Mantenimiento de jardín",
-                "Diseño de jardín", "Sistema de riego", "Control de plagas"
-        });
-        datosServicios.put("Plomería", new String[]{
-                "Fugas de agua", "Instalación de sanitarios", "Destape de drenajes", "Reparación de boilers"
-        });
-        datosServicios.put("Electricidad", new String[]{
-                "Cortocircuitos", "Instalación de lámparas", "Cableado general", "Tableros eléctricos"
-        });
-    }
-
-    private void actualizarServicios(String categoria) {
-        if (containerServicios == null) return;
-        
-        containerServicios.removeAllViews(); // Limpiar checkboxes anteriores
-
-        String[] servicios = datosServicios.get(categoria);
-        if (servicios != null) {
-            for (String servicio : servicios) {
-                CheckBox cb = new CheckBox(this);
-                cb.setText(servicio);
-                cb.setTextColor(getResources().getColor(android.R.color.white));
-                containerServicios.addView(cb);
+    private void obtenerCategorias() {
+        RetrofitClient.getApiService().getCategorias().enqueue(new Callback<CategoriasResponse>() {
+            @Override
+            public void onResponse(Call<CategoriasResponse> call, Response<CategoriasResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    listaCategorias = response.body().getDatos();
+                    ArrayAdapter<Categoria> adapter = new ArrayAdapter<>(RegistroProveedorActivity.this,
+                            android.R.layout.simple_spinner_item, listaCategorias);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerCategoria.setAdapter(adapter);
+                } else {
+                    Toast.makeText(RegistroProveedorActivity.this, "Error al obtener categorías", Toast.LENGTH_SHORT).show();
+                }
             }
-        }
+
+            @Override
+            public void onFailure(Call<CategoriasResponse> call, Throwable t) {
+                Toast.makeText(RegistroProveedorActivity.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
