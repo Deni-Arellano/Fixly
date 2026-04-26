@@ -19,6 +19,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.fixly.models.catalogos.Categoria;
 import com.example.fixly.models.catalogos.CategoriasResponse;
+import com.example.fixly.models.catalogos.Servicio;
+import com.example.fixly.models.catalogos.ServiciosResponse;
 import com.example.fixly.network.RetrofitClient;
 
 import java.util.ArrayList;
@@ -67,8 +69,8 @@ public class RegistroProveedorActivity extends AppCompatActivity {
         spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                containerServicios.removeAllViews();
-                Toast.makeText(RegistroProveedorActivity.this, "Seleccionaste: " + listaCategorias.get(position).getNombre(), Toast.LENGTH_SHORT).show();
+                Categoria seleccionada = listaCategorias.get(position);
+                cargarServicios(seleccionada.getId());
             }
 
             @Override
@@ -95,14 +97,39 @@ public class RegistroProveedorActivity extends AppCompatActivity {
                             android.R.layout.simple_spinner_item, listaCategorias);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerCategoria.setAdapter(adapter);
-                } else {
-                    Toast.makeText(RegistroProveedorActivity.this, "Error al obtener categorías", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<CategoriasResponse> call, Throwable t) {
-                Toast.makeText(RegistroProveedorActivity.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistroProveedorActivity.this, "Error al cargar categorías", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void cargarServicios(int categoriaId) {
+        RetrofitClient.getApiService().getServiciosPorCategoria(categoriaId).enqueue(new Callback<ServiciosResponse>() {
+            @Override
+            public void onResponse(Call<ServiciosResponse> call, Response<ServiciosResponse> response) {
+                containerServicios.removeAllViews();
+                
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Servicio> servicios = response.body().getDatos();
+                    for (Servicio servicio : servicios) {
+                        CheckBox cb = new CheckBox(RegistroProveedorActivity.this);
+                        cb.setText(servicio.getNombre());
+                        cb.setTag(servicio.getId());
+                        cb.setTextColor(getResources().getColor(android.R.color.white));
+                        containerServicios.addView(cb);
+                    }
+                } else {
+                    Toast.makeText(RegistroProveedorActivity.this, "Error al obtener servicios", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ServiciosResponse> call, Throwable t) {
+                Toast.makeText(RegistroProveedorActivity.this, "Error de red al cargar servicios", Toast.LENGTH_SHORT).show();
             }
         });
     }

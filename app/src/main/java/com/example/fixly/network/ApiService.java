@@ -1,6 +1,7 @@
 package com.example.fixly.network;
 
 import com.example.fixly.models.catalogos.CategoriasResponse;
+import com.example.fixly.models.catalogos.ServiciosResponse;
 import com.example.fixly.models.login.LoginRequest;
 import com.example.fixly.models.login.LoginResponse;
 import com.example.fixly.models.registroCliente.RegistroRequest;
@@ -11,6 +12,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiService {
     @GET("/")
@@ -24,4 +26,7 @@ public interface ApiService {
 
     @GET("catalogs/categorias")
     Call<CategoriasResponse> getCategorias();
+
+    @GET("catalogs/categorias/servicios")
+    Call<ServiciosResponse> getServiciosPorCategoria(@Query("id") int categoriaId);
 }
