@@ -8,6 +8,7 @@ import com.example.fixly.models.registroCliente.RegistroRequest;
 import com.example.fixly.models.registroCliente.RegistroResponse;
 import com.example.fixly.models.registroProveedor.RegistroProveedorRequest;
 import com.example.fixly.models.registroProveedor.RegistroProveedorResponse;
+import com.example.fixly.models.verPerfilCliente.PerfilClienteResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -38,4 +39,7 @@ public interface ApiService {
             @Header("Authorization") String token,
             @Body RegistroProveedorRequest request
     );
+
+    @GET("users/verPerfil")
+    Call<PerfilClienteResponse> verPerfilCliente(@Header("Authorization") String token);
 }
