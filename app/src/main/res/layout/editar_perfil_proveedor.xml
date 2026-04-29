@@ -188,6 +188,8 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="32dp"
                 android:backgroundTint="@color/amarillo_fixly"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:text="Guardar"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
@@ -195,11 +197,14 @@
                 app:cornerRadius="4dp"/>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/boton_cancelar"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="24dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:text="Cancelar"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
