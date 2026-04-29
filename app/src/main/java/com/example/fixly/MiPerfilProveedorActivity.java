@@ -37,9 +37,6 @@ public class MiPerfilProveedorActivity extends BaseActivity {
         imagenProveedor = findViewById(R.id.imagen_proveedor);
         ratingBar = findViewById(R.id.rating_bar);
 
-
-        cargarPerfil();
-
         View btnCambiarContrasena = findViewById(R.id.boton_password);
         btnCambiarContrasena.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +94,12 @@ public class MiPerfilProveedorActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cargarPerfil();
+    }
+
     private void cargarPerfil() {
         SharedPreferences preferences = getSharedPreferences("fixly_sesion", MODE_PRIVATE);
         String token = "Bearer " + preferences.getString("access_token", "");
@@ -131,7 +134,7 @@ public class MiPerfilProveedorActivity extends BaseActivity {
 
         if (datos.getPrestador() != null) {
             textoDescripcion.setText(datos.getPrestador().getDescripcion());
-            
+
 
             if (datos.getPrestador().getCalificaciones() != null) {
                 ratingBar.setRating((float) datos.getPrestador().getCalificaciones().getPromedio());

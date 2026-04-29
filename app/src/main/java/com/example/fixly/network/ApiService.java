@@ -2,6 +2,7 @@ package com.example.fixly.network;
 
 import com.example.fixly.models.catalogos.CategoriasResponse;
 import com.example.fixly.models.catalogos.ServiciosResponse;
+import com.example.fixly.models.editarPerfilProveedor.EditarPerfilProveedorRequest;
 import com.example.fixly.models.login.LoginRequest;
 import com.example.fixly.models.login.LoginResponse;
 import com.example.fixly.models.registroCliente.RegistroRequest;
@@ -17,6 +18,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -46,4 +48,10 @@ public interface ApiService {
 
     @GET("users/verPerfil")
     Call<PerfilProveedorResponse> verPerfilProveedor(@Header("Authorization") String token);
+
+    @PUT("users/editarPerfil")
+    Call<RegistroProveedorResponse> editarPerfilProveedor(
+            @Header("Authorization") String token,
+            @Body EditarPerfilProveedorRequest request
+    );
 }
