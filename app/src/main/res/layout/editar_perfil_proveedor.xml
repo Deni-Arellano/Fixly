@@ -125,24 +125,6 @@
                 android:textColor="@android:color/black"
                 android:text="Bañuelos"/>
 
-            <!-- CORREO -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Correo:"
-                android:textColor="@color/azul_fixly"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_marginTop="16dp"/>
-
-            <EditText
-                android:id="@+id/edit_correo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/azul_fixly"
-                android:textColor="@android:color/black"
-                android:inputType="textEmailAddress"
-                android:text="correo@gmail.com"/>
 
             <!-- TELEFONO -->
             <TextView
