@@ -2,6 +2,7 @@ package com.example.fixly.network;
 
 import com.example.fixly.models.catalogos.CategoriasResponse;
 import com.example.fixly.models.catalogos.ServiciosResponse;
+import com.example.fixly.models.editarPerfilCliente.EditarPerfilClienteRequest;
 import com.example.fixly.models.editarPerfilProveedor.EditarPerfilProveedorRequest;
 import com.example.fixly.models.login.LoginRequest;
 import com.example.fixly.models.login.LoginResponse;
@@ -48,6 +49,12 @@ public interface ApiService {
 
     @GET("users/verPerfil")
     Call<PerfilProveedorResponse> verPerfilProveedor(@Header("Authorization") String token);
+
+    @PUT("users/editarPerfil")
+    Call<RegistroResponse> editarPerfil(
+            @Header("Authorization") String token,
+            @Body EditarPerfilClienteRequest request
+    );
 
     @PUT("users/editarPerfil")
     Call<RegistroProveedorResponse> editarPerfilProveedor(

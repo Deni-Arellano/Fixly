@@ -4,13 +4,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.fixly.models.editarPerfilCliente.EditarPerfilClienteRequest;
+import com.example.fixly.models.registroCliente.RegistroResponse;
 import com.example.fixly.models.verPerfilCliente.PerfilCliente;
 import com.example.fixly.models.verPerfilCliente.PerfilClienteResponse;
 import com.example.fixly.network.RetrofitClient;
+import com.google.gson.Gson;
+
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,6 +26,7 @@ public class EditarPerfilClienteActivity extends BaseActivity {
 
     private EditText editNombre, editApellidoPaterno, editApellidoMaterno, editTelefono;
     private ImageView imagenPerfil;
+    private String fotoPerfilActual = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,16 @@ public class EditarPerfilClienteActivity extends BaseActivity {
         imagenPerfil = findViewById(R.id.imagen_editar_perfil_cliente);
 
         cargarPerfil();
+
+        Button btnGuardar = findViewById(R.id.boton_guardar_editar_perfil_cliente);
+        if (btnGuardar != null) {
+            btnGuardar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    actualizarPerfil();
+                }
+            });
+        }
 
         View btnCancelar = findViewById(R.id.boton_cancelar_guardar_editar_perfil_cliente);
         if (btnCancelar != null) {
@@ -123,6 +140,75 @@ public class EditarPerfilClienteActivity extends BaseActivity {
         editApellidoPaterno.setText(datos.getApellidoPaterno());
         editApellidoMaterno.setText(datos.getApellidoMaterno());
         editTelefono.setText(datos.getTelefono());
+        fotoPerfilActual = datos.getFotoPerfil();
+    }
 
+    private void actualizarPerfil() {
+        String nombre = editNombre.getText().toString().trim();
+        String apellidoP = editApellidoPaterno.getText().toString().trim();
+        String apellidoM = editApellidoMaterno.getText().toString().trim();
+        String telefono = editTelefono.getText().toString().trim();
+
+
+        EditarPerfilClienteRequest request = new EditarPerfilClienteRequest(
+                fotoPerfilActual,
+                nombre,
+                apellidoP,
+                apellidoM,
+                telefono
+        );
+
+        SharedPreferences preferences = getSharedPreferences("fixly_sesion", MODE_PRIVATE);
+        String token = "Bearer " + preferences.getString("access_token", "");
+
+        RetrofitClient.getApiService().editarPerfil(token, request).enqueue(new Callback<RegistroResponse>() {
+            @Override
+            public void onResponse(Call<RegistroResponse> call, Response<RegistroResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(EditarPerfilClienteActivity.this, response.body().getMensaje(), Toast.LENGTH_LONG).show();
+                    finish();
+                } else {
+                    try {
+                        String errorJson = response.errorBody().string();
+                        RegistroResponse errorRes = new Gson().fromJson(errorJson, RegistroResponse.class);
+
+                        if (errorRes != null && errorRes.getCodigo() == 422 && errorRes.getErrores() != null) {
+                            Toast.makeText(EditarPerfilClienteActivity.this, errorRes.getMensaje(), Toast.LENGTH_LONG).show();
+
+                            for (Map.Entry<String, String> entry : errorRes.getErrores().entrySet()) {
+                                mostrarErrorEnInput(entry.getKey(), entry.getValue());
+                            }
+                        } else {
+                            String msg = (errorRes != null) ? errorRes.getMensaje() : "Error al actualizar perfil";
+                            Toast.makeText(EditarPerfilClienteActivity.this, msg, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(EditarPerfilClienteActivity.this, "Error al procesar la respuesta", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegistroResponse> call, Throwable t) {
+                Toast.makeText(EditarPerfilClienteActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void mostrarErrorEnInput(String campo, String mensaje) {
+        switch (campo) {
+            case "nombre":
+                editNombre.setError(mensaje);
+                break;
+            case "apellido_paterno":
+                editApellidoPaterno.setError(mensaje);
+                break;
+            case "apellido_materno":
+                editApellidoMaterno.setError(mensaje);
+                break;
+            case "telefono":
+                editTelefono.setError(mensaje);
+                break;
+        }
     }
 }

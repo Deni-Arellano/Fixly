@@ -24,11 +24,9 @@ public class PerfilClienteActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setupEdgeToEdge(R.layout.perfil_cliente);
 
-
         textoNombre = findViewById(R.id.texto_nombre_cliente);
         textoCorreo = findViewById(R.id.texto_correo_cliente);
         textoTelefono = findViewById(R.id.texto_telefono_cliente);
-        cargarPerfil();
 
         View btnEditarPerfil = findViewById(R.id.boton_editar_perfil_cliente);
         btnEditarPerfil.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +85,12 @@ public class PerfilClienteActivity extends BaseActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cargarPerfil();
     }
 
     private void cargarPerfil() {
