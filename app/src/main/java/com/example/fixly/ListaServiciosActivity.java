@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.view.View;
+import android.widget.TextView;
 
 public class ListaServiciosActivity extends BaseActivity {
     @Override
@@ -11,6 +12,15 @@ public class ListaServiciosActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setupEdgeToEdge(R.layout.lista_servicios);
+
+        // para traerme el id y el titulo del servicio seleccionado y mostrar el servicio en la pantalla
+        int idServicio = getIntent().getIntExtra("id_servicio", -1);
+        String nombreServicio = getIntent().getStringExtra("nombre_servicio");
+
+        TextView tvTitulo = findViewById(R.id.titulo_servicio);
+        if (tvTitulo != null && nombreServicio != null) {
+            tvTitulo.setText("¿Necesitas servicio de " + nombreServicio + "?");
+        }
 
         // Reference the RecyclerView defined in lista_servicios.xml
         RecyclerView recyclerView = findViewById(R.id.lista_proveedores);
