@@ -96,19 +96,7 @@ public class EditarPerfilClienteActivity extends BaseActivity {
             });
         }
 
-        // --- HEADER ---
 
-        View btnSalir = findViewById(R.id.imageView);
-        if (btnSalir != null) {
-            btnSalir.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(EditarPerfilClienteActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        }
     }
 
     private void cargarPerfil() {

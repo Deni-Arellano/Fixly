@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -18,8 +19,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.fixly.models.login.LoginRequest;
 import com.example.fixly.models.login.LoginResponse;
 import com.example.fixly.network.RetrofitClient;
-
-import java.io.IOException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -36,6 +35,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        SharedPreferences preferences = getSharedPreferences("fixly_sesion", MODE_PRIVATE);
+        if (preferences.getInt("id_usuario", -1) != -1) {
+            lanzarActividadPorRol(preferences.getInt("id_rol", 3));
+            finish();
+            return;
+        }
+
+
+        //para no regresar a otras pantallas desde el login
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                finishAffinity();
+            }
+        });
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
@@ -46,37 +62,23 @@ public class MainActivity extends AppCompatActivity {
         inputCorreo = findViewById(R.id.input_correo_login);
         inputPassword = findViewById(R.id.input_contraseña_login);
 
-        originalTopPadding = topContainer.getPaddingTop();
-        originalBottomPadding = bottomContainer.getPaddingBottom();
+        if (topContainer != null && bottomContainer != null) {
+            originalTopPadding = topContainer.getPaddingTop();
+            originalBottomPadding = bottomContainer.getPaddingBottom();
+            ViewCompat.setOnApplyWindowInsetsListener(main, (v, insets) -> {
+                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                topContainer.setPadding(topContainer.getPaddingLeft(), originalTopPadding + systemBars.top, topContainer.getPaddingRight(), topContainer.getPaddingBottom());
+                bottomContainer.setPadding(bottomContainer.getPaddingLeft(), bottomContainer.getPaddingTop(), bottomContainer.getPaddingRight(), originalBottomPadding + systemBars.bottom);
+                return insets;
+            });
+        }
 
-        ViewCompat.setOnApplyWindowInsetsListener(main, (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-            topContainer.setPadding(
-                    topContainer.getPaddingLeft(),
-                    originalTopPadding + systemBars.top,
-                    topContainer.getPaddingRight(),
-                    topContainer.getPaddingBottom()
-            );
-
-            bottomContainer.setPadding(
-                    bottomContainer.getPaddingLeft(),
-                    bottomContainer.getPaddingTop(),
-                    bottomContainer.getPaddingRight(),
-                    originalBottomPadding + systemBars.bottom
-            );
-
-            return insets;
-        });
-
-        // Probar conexión al backend al iniciar
         probarConexionBackend();
 
         Button btnIngresar = findViewById(R.id.boton_ingresar_login);
         btnIngresar.setOnClickListener(view -> {
             String correo = inputCorreo.getText().toString().trim();
             String password = inputPassword.getText().toString().trim();
-
             if (correo.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Por favor llena todos los campos", Toast.LENGTH_SHORT).show();
             } else {
@@ -86,62 +88,44 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tvRegistrarse = findViewById(R.id.textview_registrarse_login);
         tvRegistrarse.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, RegistroClienteActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, RegistroClienteActivity.class));
         });
     }
 
     private void loginUsuario(String email, String password) {
-        LoginRequest loginRequest = new LoginRequest(email, password);
-        
-        RetrofitClient.getApiService().login(loginRequest).enqueue(new Callback<LoginResponse>() {
+        RetrofitClient.getApiService().login(new LoginRequest(email, password)).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    LoginResponse loginResponse = response.body();
-                    
-                    String mensaje = loginResponse.getMensaje() != null ? loginResponse.getMensaje() : "Bienvenido";
-                    Toast.makeText(MainActivity.this, mensaje, Toast.LENGTH_SHORT).show();
-
-                    if (loginResponse.getDatos() != null) {
-                        guardarDatosSesion(loginResponse.getDatos());
-
-                        int idRol = loginResponse.getDatos().getIdRol();
-                        Intent intent;
-
-                        switch (idRol) {
-                            case 1:
-                                intent = new Intent(MainActivity.this, AdministradorUsuariosActivity.class);
-                                break;
-                            case 2:
-                                intent = new Intent(MainActivity.this, SolicitudesProveedorActivity.class);
-                                break;
-                            case 3:
-                                intent = new Intent(MainActivity.this, InicioActivity.class);
-                                break;
-                            default:
-                                intent = new Intent(MainActivity.this, InicioActivity.class);
-                                break;
-                        }
-                        startActivity(intent);
+                    LoginResponse res = response.body();
+                    if (res.getDatos() != null) {
+                        guardarDatosSesion(res.getDatos());
+                        lanzarActividadPorRol(res.getDatos().getIdRol());
                         finish();
                     }
                 } else {
                     Toast.makeText(MainActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error de red: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Error de red", Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    private void guardarDatosSesion(LoginResponse.Datos datos) {
-        SharedPreferences preferences = getSharedPreferences("fixly_sesion", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+    private void lanzarActividadPorRol(int idRol) {
+        Intent intent;
+        switch (idRol) {
+            case 1: intent = new Intent(this, AdministradorUsuariosActivity.class); break;
+            case 2: intent = new Intent(this, SolicitudesProveedorActivity.class); break;
+            default: intent = new Intent(this, InicioActivity.class); break;
+        }
+        startActivity(intent);
+    }
 
+    private void guardarDatosSesion(LoginResponse.Datos datos) {
+        SharedPreferences.Editor editor = getSharedPreferences("fixly_sesion", MODE_PRIVATE).edit();
         editor.putInt("id_usuario", datos.getIdUsuario());
         editor.putInt("id_rol", datos.getIdRol());
         editor.putString("access_token", datos.getAccessToken());
@@ -151,14 +135,9 @@ public class MainActivity extends AppCompatActivity {
     private void probarConexionBackend() {
         RetrofitClient.getApiService().checkStatus().enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(MainActivity.this, "Backend conectado", Toast.LENGTH_SHORT).show();
-                }
-            }
-
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {}
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) { }
+            public void onFailure(Call<ResponseBody> call, Throwable t) {}
         });
     }
 }

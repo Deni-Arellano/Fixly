@@ -81,15 +81,6 @@ public class EditarPerfilProveedorActivity extends BaseActivity {
             });
         }
 
-        // --- HEADER ---
-        View btnSalir = findViewById(R.id.imageView);
-        if (btnSalir != null) {
-            btnSalir.setOnClickListener(v -> {
-                Intent intent = new Intent(EditarPerfilProveedorActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            });
-        }
     }
 
     private void cargarDatosPerfil() {

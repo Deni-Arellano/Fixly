@@ -13,41 +13,37 @@ public class CambiarContrasenaActivity extends BaseActivity {
         // --- NAVEGACIÓN INFERIOR ---
 
         View btnHistorial = findViewById(R.id.historial_barra_navegacion);
-        btnHistorial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CambiarContrasenaActivity.this, HistorialSolicitudesActivity.class);
-                startActivity(intent);
-            }
-        });
+        if (btnHistorial != null) {
+            btnHistorial.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(CambiarContrasenaActivity.this, HistorialSolicitudesActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
         View btnInicio = findViewById(R.id.home_barra_navegacion);
-        btnInicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CambiarContrasenaActivity.this, InicioActivity.class);
-                startActivity(intent);
-            }
-        });
+        if (btnInicio != null) {
+            btnInicio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(CambiarContrasenaActivity.this, InicioActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
         View btnPerfil = findViewById(R.id.perfil_barra_navegacion);
-        btnPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CambiarContrasenaActivity.this, PerfilClienteActivity.class);
-                startActivity(intent);
-            }
-        });
+        if (btnPerfil != null) {
+            btnPerfil.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(CambiarContrasenaActivity.this, PerfilClienteActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
-        // --- HEADER ---
-
-        View btnSalir = findViewById(R.id.imageView);
-        btnSalir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CambiarContrasenaActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

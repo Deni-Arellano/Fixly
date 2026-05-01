@@ -66,14 +66,5 @@ public class VerSolicitudActivity extends BaseActivity {
             });
         }
 
-        // --- HEADER ---
-
-        View btnSalir = findViewById(R.id.imageView);
-        if (btnSalir != null) {
-            btnSalir.setOnClickListener(v -> {
-                Intent intent = new Intent(VerSolicitudActivity.this, MainActivity.class);
-                startActivity(intent);
-            });
-        }
     }
 }

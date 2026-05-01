@@ -19,16 +19,5 @@ public class AdministradorUsuariosActivity extends BaseActivity {
             }
         });
 
-
-        // --- HEADER ---
-        View btnSalir = findViewById(R.id.imageView);
-        btnSalir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AdministradorUsuariosActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 }

@@ -13,7 +13,7 @@ public class HistorialSolicitudesActivity extends BaseActivity {
         // --- CONEXIÓN DE LAS TARJETAS ---
         
         // Buscamos el botón de 'Ver solicitud' dentro del layout historial_solicitudes
-               View btnVerSolicitud = findViewById(R.id.boton_guardar_cambiar_contrasena);
+        View btnVerSolicitud = findViewById(R.id.boton_guardar_cambiar_contrasena);
         if (btnVerSolicitud != null) {
             btnVerSolicitud.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -49,14 +49,6 @@ public class HistorialSolicitudesActivity extends BaseActivity {
             });
         }
 
-        // --- HEADER ---
 
-        View btnSalir = findViewById(R.id.imageView);
-        if (btnSalir != null) {
-            btnSalir.setOnClickListener(v -> {
-                Intent intent = new Intent(HistorialSolicitudesActivity.this, MainActivity.class);
-                startActivity(intent);
-            });
-        }
     }
 }

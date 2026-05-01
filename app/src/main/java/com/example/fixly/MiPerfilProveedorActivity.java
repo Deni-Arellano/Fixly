@@ -79,19 +79,7 @@ public class MiPerfilProveedorActivity extends BaseActivity {
             });
         }
 
-        // --- HEADER ---
 
-        View btnSalir = findViewById(R.id.imageView);
-        if (btnSalir != null) {
-            btnSalir.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MiPerfilProveedorActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        }
     }
 
     @Override

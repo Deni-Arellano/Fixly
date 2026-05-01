@@ -52,15 +52,6 @@ public class PerfilProveedorActivity extends BaseActivity {
             }
         });
 
-        // --- HEADER ---
 
-        View btnSalir = findViewById(R.id.imageView);
-        btnSalir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PerfilProveedorActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

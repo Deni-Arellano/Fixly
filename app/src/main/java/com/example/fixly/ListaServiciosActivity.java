@@ -18,24 +18,28 @@ public class ListaServiciosActivity extends BaseActivity {
         // SELECCION DEL PERFIL DEL PROVVEDOR
         View tarjeta = findViewById(R.id.item_proveedor);
 
-        tarjeta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ListaServiciosActivity.this, PerfilProveedorActivity.class);
-                startActivity(intent);
-            }
-        });
+        if (tarjeta != null) {
+            tarjeta.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ListaServiciosActivity.this, PerfilProveedorActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
         // --- NAVEGACIÓN INFERIOR ---
 
         View btnHistorial = findViewById(R.id.historial_barra_navegacion);
-        btnHistorial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ListaServiciosActivity.this, HistorialSolicitudesActivity.class);
-                startActivity(intent);
-            }
-        });
+        if (btnHistorial != null) {
+            btnHistorial.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ListaServiciosActivity.this, HistorialSolicitudesActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
         View btnInicio = findViewById(R.id.home_barra_navegacion);
         if (btnInicio != null) {
@@ -47,24 +51,15 @@ public class ListaServiciosActivity extends BaseActivity {
 
 
         View btnPerfil = findViewById(R.id.perfil_barra_navegacion);
-        btnPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ListaServiciosActivity.this, PerfilClienteActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // --- HEADER ---
-
-        View btnSalir = findViewById(R.id.imageView);
-        btnSalir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ListaServiciosActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+        if (btnPerfil != null) {
+            btnPerfil.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ListaServiciosActivity.this, PerfilClienteActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
     }
 }
