@@ -9,37 +9,32 @@
 
     <include layout="@layout/header" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fillViewport="true">
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp">
 
-        <LinearLayout
-            android:id="@+id/contenedor_contenido_solicitudes"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingVertical="16dp">
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Mis solicitudes"
+            android:textAlignment="textStart"
+            android:textColor="@color/azul_medio_fixly"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="32dp"
-                android:paddingHorizontal="24dp"
-                android:text="Mis solicitudes"
-                android:textAlignment="textStart"
-                android:textColor="@color/azul_medio_fixly"
-                android:textSize="28sp"
-                android:textStyle="bold" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_historial_solicitudes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp" />
 
-            <include layout="@layout/item_solicitud" />
-
-            <include layout="@layout/item_solicitud" />
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
     <include layout="@layout/bottom_nav" />
 

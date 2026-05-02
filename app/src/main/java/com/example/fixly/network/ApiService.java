@@ -4,6 +4,7 @@ import com.example.fixly.models.catalogos.CategoriasResponse;
 import com.example.fixly.models.catalogos.ServiciosResponse;
 import com.example.fixly.models.editarPerfilCliente.EditarPerfilClienteRequest;
 import com.example.fixly.models.editarPerfilProveedor.EditarPerfilProveedorRequest;
+import com.example.fixly.models.historial.HistorialResponse;
 import com.example.fixly.models.login.LoginRequest;
 import com.example.fixly.models.login.LoginResponse;
 import com.example.fixly.models.registroCliente.RegistroRequest;
@@ -61,4 +62,7 @@ public interface ApiService {
             @Header("Authorization") String token,
             @Body EditarPerfilProveedorRequest request
     );
+
+    @GET("service-requests/verSolicitudes")
+    Call<HistorialResponse> getHistorialSolicitudes(@Header("Authorization") String token);
 }
