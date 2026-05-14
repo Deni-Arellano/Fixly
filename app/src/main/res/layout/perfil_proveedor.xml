@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,24 +9,22 @@
 
     <include layout="@layout/header"/>
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
+        android:layout_weight="1">
 
         <LinearLayout
             android:id="@+id/contenedor_contenido_perfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:paddingBottom="40dp">
+            android:padding="16dp">
 
             <!-- FOTO -->
             <FrameLayout
-                android:layout_width="140dp"
-                android:layout_height="140dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:background="@drawable/fondo_imagen_redondeada"
                 android:padding="4dp">
@@ -47,9 +44,9 @@
                 android:id="@+id/texto_nombre_proveedor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombre"
+                android:text="Nombre Apellido"
                 android:textStyle="bold"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:textColor="@color/azul_fixly"
                 android:gravity="center"
                 android:layout_marginTop="12dp"/>
@@ -59,9 +56,8 @@
                 android:id="@+id/texto_telefono_proveedor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Teléfono"
+                android:text="999 123 45 67"
                 android:gravity="center"
-                android:textColor="@color/gris_texto"
                 android:layout_marginTop="4dp"/>
 
             <!-- DESCRIPCION -->
@@ -69,84 +65,79 @@
                 android:id="@+id/texto_descripcion_proveedor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Descripción profesional..."
+                android:text="Descripción..."
                 android:gravity="center"
-                android:layout_marginTop="12dp"/>
+                android:layout_marginTop="8dp"/>
 
             <!-- RATING -->
             <RatingBar
                 android:id="@+id/rating_proveedor"
-                style="?android:attr/ratingBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-                android:stepSize="0.1"
+                android:stepSize="0.5"
                 android:isIndicator="true"
-                android:progressTint="@color/amarillo_fixly"
-                android:secondaryProgressTint="@android:color/transparent"
-                android:backgroundTint="@android:color/transparent"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"/>
 
             <!-- SERVICIOS -->
             <TextView
+                android:id="@+id/titulo_servicios"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Servicios ofrecidos"
+                android:text="Servicios"
                 android:textStyle="bold"
                 android:textColor="@color/azul_fixly"
-                android:layout_marginTop="24dp"/>
+                android:layout_marginTop="16dp"/>
 
             <TextView
                 android:id="@+id/texto_servicios_proveedor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cargando servicios..."
-                android:lineSpacingExtra="4dp"
-                android:layout_marginTop="8dp"/>
+                android:text="Servicios..."
+                android:layout_marginTop="4dp"/>
 
             <!-- BOTON -->
             <Button
                 android:id="@+id/boton_solicitar_servicio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="SOLICITAR SERVICIO"
-                android:textStyle="bold"
+                android:text="Solicitar servicio"
                 android:backgroundTint="@color/amarillo_fixly"
                 android:textColor="@color/azul_fixly"
-                android:layout_marginTop="24dp"
-                android:padding="12dp"/>
+                android:layout_marginTop="16dp"/>
 
             <!-- COMENTARIOS -->
             <TextView
                 android:id="@+id/titulo_comentarios"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reseñas de clientes"
+                android:text="Comentarios"
                 android:textStyle="bold"
                 android:textColor="@color/azul_fixly"
-                android:layout_marginTop="24dp"/>
+                android:layout_marginTop="16dp"/>
 
             <TextView
                 android:id="@+id/texto_sin_comentarios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Este prestador aún no tiene reseñas."
+                android:text="Aún no hay comentarios"
                 android:gravity="center"
                 android:visibility="gone"
-                android:layout_marginTop="12dp"/>
+                android:layout_marginTop="8dp"/>
 
-            <!-- Lista de comentarios dinámica -->
+            <include layout="@layout/item_comentario"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lista_comentarios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
-                android:layout_marginTop="12dp"/>
+                android:layout_marginTop="8dp"/>
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
     <include layout="@layout/bottom_nav"/>
 

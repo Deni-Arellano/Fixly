@@ -18,9 +18,9 @@ public class PrestadorPerfil {
 
     public static class CalificacionesPerfil {
         private double promedio;
-        private List<String> comentarios;
+        private List<Object> comentarios;
 
         public double getPromedio() { return promedio; }
-        public List<String> getComentarios() { return comentarios; }
+        public List<Object> getComentarios() { return comentarios; }
     }
 }

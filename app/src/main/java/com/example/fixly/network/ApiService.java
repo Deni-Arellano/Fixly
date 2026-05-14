@@ -91,11 +91,4 @@ public interface ApiService {
             @Header("Authorization") String token,
             @Path("id") int idCategoria
     );
-
-
-    @GET("users/prestador/{id}")
-    Call<PerfilProveedorResponse> getPerfilPrestador(
-            @Header("Authorization") String token,
-            @Path("id") int idPrestador
-    );
 }
