@@ -13,6 +13,8 @@ import com.example.fixly.models.registroProveedor.RegistroProveedorRequest;
 import com.example.fixly.models.registroProveedor.RegistroProveedorResponse;
 import com.example.fixly.models.verPerfilCliente.PerfilClienteResponse;
 import com.example.fixly.models.verPerfilProveedor.PerfilProveedorResponse;
+import com.example.fixly.models.administrador.UsuariosAdminResponse;
+import com.example.fixly.models.administrador.UpdateEstadoRequest;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -21,6 +23,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -65,4 +68,20 @@ public interface ApiService {
 
     @GET("service-requests/verSolicitudes")
     Call<HistorialResponse> getHistorialSolicitudes(@Header("Authorization") String token);
+
+    @GET("admin/usuarios")
+    Call<UsuariosAdminResponse> getUsuariosAdmin(@Header("Authorization") String token);
+
+    @PUT("admin/usuarios/{id}/estado")
+    Call<ResponseBody> updateEstadoUsuario(
+            @Header("Authorization") String token,
+            @Path("id") int id,
+            @Body UpdateEstadoRequest request
+    );
+
+    @GET("admin/usuarios/busqueda")
+    Call<UsuariosAdminResponse> buscarUsuariosAdmin(
+            @Header("Authorization") String token,
+            @Query("busqueda") String query
+    );
 }

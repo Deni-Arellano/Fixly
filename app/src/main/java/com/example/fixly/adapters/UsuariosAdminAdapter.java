@@ -14,9 +14,15 @@ import java.util.List;
 public class UsuariosAdminAdapter extends RecyclerView.Adapter<UsuariosAdminAdapter.UsuarioViewHolder> {
 
     private List<UsuarioAdmin> usuarios;
+    private OnUserStatusChangeListener listener;
 
-    public UsuariosAdminAdapter(List<UsuarioAdmin> usuarios) {
+    public interface OnUserStatusChangeListener {
+        void onStatusChange(UsuarioAdmin usuario, boolean isChecked);
+    }
+
+    public UsuariosAdminAdapter(List<UsuarioAdmin> usuarios, OnUserStatusChangeListener listener) {
         this.usuarios = usuarios;
+        this.listener = listener;
     }
 
     @NonNull
@@ -29,14 +35,29 @@ public class UsuariosAdminAdapter extends RecyclerView.Adapter<UsuariosAdminAdap
     @Override
     public void onBindViewHolder(@NonNull UsuarioViewHolder holder, int position) {
         UsuarioAdmin usuario = usuarios.get(position);
-        String nombreCompleto = usuario.getNombre() + " " + usuario.getApellidoPaterno() + " " + usuario.getApellidoMaterno();
-        holder.tvNombre.setText(nombreCompleto);
+        
+        holder.tvNombre.setText(usuario.getNombreCompleto());
         holder.tvEmail.setText(usuario.getCorreo());
         holder.tvTelefono.setText(usuario.getTelefono());
         holder.tvRol.setText(usuario.getRol());
         
-        holder.swEstado.setChecked(usuario.getEstatus() == 1);
-        holder.tvEstadoBadge.setText(usuario.getEstatus() == 1 ? "Activo" : "Inactivo");
+        // Evitar que el listener se dispare al setear el valor inicial
+        holder.swEstado.setOnCheckedChangeListener(null);
+        holder.swEstado.setChecked(usuario.getEstadoId() == 1);
+        holder.tvEstadoBadge.setText(usuario.getEstado());
+        
+        if (usuario.getEstadoId() == 1) {
+             holder.tvEstadoBadge.setBackgroundResource(R.drawable.bg_estado_activo);
+        } else {
+             holder.tvEstadoBadge.setBackgroundResource(R.drawable.bg_estado_suspendido);
+        }
+
+        // Listener para el cambio de estado
+        holder.swEstado.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (listener != null) {
+                listener.onStatusChange(usuario, isChecked);
+            }
+        });
     }
 
     @Override
@@ -54,7 +75,7 @@ public class UsuariosAdminAdapter extends RecyclerView.Adapter<UsuariosAdminAdap
         SwitchCompat swEstado;
 
         public UsuarioViewHolder(@NonNull View itemView) {
-            super(holder itemView);
+            super(itemView);
             tvNombre = itemView.findViewById(R.id.tvNombreUsuario);
             tvEmail = itemView.findViewById(R.id.tvEmailUsuario);
             tvTelefono = itemView.findViewById(R.id.tvTelefonoUsuario);

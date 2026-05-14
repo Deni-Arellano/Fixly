@@ -274,26 +274,35 @@ public class RegistroProveedorActivity extends AppCompatActivity {
     }
 
     private void mostrarErrorEnInput(String campo, String mensaje) {
-        String msgLower = mensaje.toLowerCase();
-
-        if (campo.equals("usuario")) {
-            if (msgLower.contains("teléfono") || msgLower.contains("10 y 15 dígitos")) {
-                inputTelefono.setError(mensaje);
-            } else if (msgLower.contains("correo")) {
-                inputCorreo.setError(mensaje);
-            } else if (msgLower.contains("apellido paterno")) {
-                inputApellidoP.setError(mensaje);
-            } else if (msgLower.contains("apellido materno")) {
-                inputApellidoM.setError(mensaje);
-            } else if (msgLower.contains("mayúscula") || msgLower.contains("carácter especial")) {
-                inputPassword.setError(mensaje);
-            } else if (msgLower.contains("nombre") && !msgLower.contains("apellido")) {
+        switch (campo) {
+            case "nombre":
                 inputNombre.setError(mensaje);
-            }
-        } else if (campo.equals("datos_prestador")) {
-            if (msgLower.contains("descripción") || msgLower.contains("obligatoria")) {
+                inputNombre.requestFocus();
+                break;
+            case "apellido_paterno":
+                inputApellidoP.setError(mensaje);
+                inputApellidoP.requestFocus();
+                break;
+            case "apellido_materno":
+                inputApellidoM.setError(mensaje);
+                inputApellidoM.requestFocus();
+                break;
+            case "correo":
+                inputCorreo.setError(mensaje);
+                inputCorreo.requestFocus();
+                break;
+            case "telefono":
+                inputTelefono.setError(mensaje);
+                inputTelefono.requestFocus();
+                break;
+            case "descripcion":
                 inputDescripcion.setError(mensaje);
-            }
+                inputDescripcion.requestFocus();
+                break;
+            case "password":
+                inputPassword.setError(mensaje);
+                inputPassword.requestFocus();
+                break;
         }
     }
 }

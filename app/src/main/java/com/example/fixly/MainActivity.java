@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.fixly.models.login.LoginRequest;
 import com.example.fixly.models.login.LoginResponse;
 import com.example.fixly.network.RetrofitClient;
+import com.google.gson.Gson;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         SharedPreferences preferences = getSharedPreferences("fixly_sesion", MODE_PRIVATE);
         if (preferences.getInt("id_usuario", -1) != -1) {
             lanzarActividadPorRol(preferences.getInt("id_rol", 3));
@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-
-        //para no regresar a otras pantallas desde el login
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -104,12 +102,27 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                     }
                 } else {
-                    Toast.makeText(MainActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+                    try {
+                        // Leer el cuerpo del error enviado por el servidor
+                        String errorBody = response.errorBody().string();
+                        LoginResponse errorRes = new Gson().fromJson(errorBody, LoginResponse.class);
+                        
+                        if (response.code() == 403) {
+                            // Mostrar mensaje de cuenta desactivada/suspendida
+                            Toast.makeText(MainActivity.this, errorRes.getMensaje(), Toast.LENGTH_LONG).show();
+                        } else {
+                            // Otros errores (401, etc.)
+                            Toast.makeText(MainActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(MainActivity.this, "Error al procesar el inicio de sesión", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
+
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error de red", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Error de red: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

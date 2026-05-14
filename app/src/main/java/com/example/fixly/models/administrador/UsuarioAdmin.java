@@ -4,23 +4,29 @@ import com.google.gson.annotations.SerializedName;
 
 public class UsuarioAdmin {
     private int id;
-    private String nombre;
-    @SerializedName("apellido_paterno")
-    private String apellidoPaterno;
-    @SerializedName("apellido_materno")
-    private String apellidoMaterno;
+
+    @SerializedName("nombre_completo")
+    private String nombreCompleto;
+
     private String correo;
     private String telefono;
-    private String rol;
-    private int estatus; // 1 para activo, 0 para inactivo
 
+    @SerializedName("rol_id")
+    private int rolId;
+
+    @SerializedName("estado_id")
+    private int estadoId;
+
+    private String rol;
+    private String estado;
+
+    // Getters
     public int getId() { return id; }
-    public String getNombre() { return nombre; }
-    public String getApellidoPaterno() { return apellidoPaterno; }
-    public String getApellidoMaterno() { return apellidoMaterno; }
+    public String getNombreCompleto() { return nombreCompleto; }
     public String getCorreo() { return correo; }
     public String getTelefono() { return telefono; }
+    public int getRolId() { return rolId; }
+    public int getEstadoId() { return estadoId; }
     public String getRol() { return rol; }
-    public int getEstatus() { return estatus; }
-    public void setEstatus(int estatus) { this.estatus = estatus; }
+    public String getEstado() { return estado; }
 }
