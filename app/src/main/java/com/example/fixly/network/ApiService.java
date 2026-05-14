@@ -15,6 +15,7 @@ import com.example.fixly.models.verPerfilCliente.PerfilClienteResponse;
 import com.example.fixly.models.verPerfilProveedor.PerfilProveedorResponse;
 import com.example.fixly.models.administrador.UsuariosAdminResponse;
 import com.example.fixly.models.administrador.UpdateEstadoRequest;
+import com.example.fixly.models.proveedores.ProveedoresCategoriaResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -83,5 +84,11 @@ public interface ApiService {
     Call<UsuariosAdminResponse> buscarUsuariosAdmin(
             @Header("Authorization") String token,
             @Query("busqueda") String query
+    );
+
+    @GET("providers/categoria/{id}")
+    Call<ProveedoresCategoriaResponse> getProveedoresPorCategoria(
+            @Header("Authorization") String token,
+            @Path("id") int idCategoria
     );
 }
