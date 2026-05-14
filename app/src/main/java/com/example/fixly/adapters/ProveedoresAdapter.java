@@ -46,15 +46,10 @@ public class ProveedoresAdapter extends RecyclerView.Adapter<ProveedoresAdapter.
             holder.txtDescripcion.setText("Sin descripción");
         }
 
-        // Si quisieras cargar la imagen (foto_perfil) puedes usar Glide o Picasso aquí
-        // if (proveedor.getFotoPerfil() != null) {
-        //     Glide.with(context).load(proveedor.getFotoPerfil()).into(holder.imgPerfil);
-        // }
-
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, PerfilProveedorActivity.class);
-            // Puedes pasar el ID del proveedor a la siguiente actividad
-            intent.putExtra("id_proveedor", proveedor.getIdPrestador());
+            // PASAMOS EL ID DEL PRESTADOR COMO ENTERO
+            intent.putExtra("id_prestador", proveedor.getIdPrestador());
             context.startActivity(intent);
         });
     }
