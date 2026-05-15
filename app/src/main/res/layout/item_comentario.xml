@@ -21,14 +21,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Anónimo"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/texto_contenido_comentario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Excelente servicio"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp"
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 

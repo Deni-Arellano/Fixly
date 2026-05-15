@@ -38,6 +38,7 @@ public class EditarPerfilProveedorActivity extends BaseActivity {
     private LinearLayout contenedorServicios;
     private String fotoPerfilActual = null;
     private final String nombreRegex = "^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' .-]+$";
+    private final String telefonoRegex = "^[0-9]{10,15}$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,6 +192,11 @@ public class EditarPerfilProveedorActivity extends BaseActivity {
 
         if (!apellidoM.isEmpty() && (!apellidoM.matches(nombreRegex) || apellidoM.length() < 2)) {
             editApellidoM.setError("Apellido materno inválido");
+            banderitaError = true;
+        }
+
+        if (!telefono.matches(telefonoRegex)) {
+            editTelefono.setError("El teléfono debe contener entre 10 y 15 dígitos");
             banderitaError = true;
         }
 

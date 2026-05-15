@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:text="correo@ejemplo.com"
                         android:textSize="16sp"
-                        android:textColor="@color/gris_texto"
+                        android:textColor="@color/black"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
 
@@ -116,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:text="000 000 00 00"
                         android:textSize="16sp"
-                        android:textColor="@color/gris_texto"
+                        android:textColor="@color/black"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
 

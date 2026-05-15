@@ -93,7 +93,7 @@
                         android:layout_height="wrap_content"
                         android:text="carlos.aran@gmail.com"
                         android:textSize="16sp"
-                        android:textColor="@color/gris_texto"
+                        android:textColor="@color/black"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
 
@@ -124,7 +124,7 @@
                         android:layout_height="wrap_content"
                         android:text="789 245 67 99"
                         android:textSize="16sp"
-                        android:textColor="@color/gris_texto"
+                        android:textColor="@color/black"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
 
@@ -155,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:text="Profesional verificado, servicio de calidad"
                         android:textSize="16sp"
-                        android:textColor="@color/gris_texto"
+                        android:textColor="@color/black"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
 
@@ -186,7 +186,7 @@
                         android:layout_height="wrap_content"
                         android:text="• Reparación de fugas&#10;• Instalación de tuberías&#10;• Destape de drenaje"
                         android:textSize="16sp"
-                        android:textColor="@color/gris_texto"
+                        android:textColor="@color/black"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
 
@@ -201,15 +201,54 @@
                 android:textColor="@color/azul_fixly"
                 android:layout_marginTop="20dp"/>
 
-            <RatingBar
-                android:id="@+id/rating_bar"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:numStars="5"
-                android:rating="4"
-                android:stepSize="0.5"
-                android:isIndicator="true"
-                android:layout_marginTop="8dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp"
+                android:padding="12dp"
+                android:background="@android:color/white"
+                android:elevation="2dp">
+
+                <TextView
+                    android:id="@+id/texto_promedio_estrellas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
+
+                    <RatingBar
+                        android:id="@+id/rating_bar"
+                        style="?android:attr/ratingBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="0"
+                        android:stepSize="0.1"
+                        android:isIndicator="true"
+                        android:progressTint="@color/amarillo_fixly"
+                        android:secondaryProgressTint="@android:color/transparent"
+                        android:backgroundTint="@android:color/transparent" />
+
+                    <TextView
+                        android:id="@+id/texto_total_comentarios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(0 comentarios)"
+                        android:textSize="14sp"
+                        android:textColor="@color/gris_texto"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
 
             <TextView
