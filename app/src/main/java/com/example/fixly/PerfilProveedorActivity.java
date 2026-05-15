@@ -34,6 +34,7 @@ public class PerfilProveedorActivity extends BaseActivity {
     private RecyclerView recyclerComentarios;
     private ComentarioAdapter comentarioAdapter;
     private int idProveedor;
+    private int idCategoria = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class PerfilProveedorActivity extends BaseActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(PerfilProveedorActivity.this, SolicitarServicioActivity.class);
                     intent.putExtra("id_proveedor", idProveedor);
+                    intent.putExtra("id_categoria", idCategoria);
                     startActivity(intent);
                 }
             });
@@ -168,6 +170,9 @@ public class PerfilProveedorActivity extends BaseActivity {
 
 
             if (prestador.getServicios() != null && textoServicios != null) {
+                if (!prestador.getServicios().isEmpty()) {
+                    idCategoria = prestador.getServicios().get(0).getIdCategoria();
+                }
                 StringBuilder sb = new StringBuilder();
                 for (ServicioPerfil s : prestador.getServicios()) {
                     sb.append("• ").append(s.getNombre()).append("\n");

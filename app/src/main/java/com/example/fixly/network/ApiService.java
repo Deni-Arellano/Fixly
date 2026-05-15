@@ -15,7 +15,9 @@ import com.example.fixly.models.verPerfilCliente.PerfilClienteResponse;
 import com.example.fixly.models.verPerfilProveedor.PerfilProveedorResponse;
 import com.example.fixly.models.administrador.UsuariosAdminResponse;
 import com.example.fixly.models.administrador.UpdateEstadoRequest;
+import com.example.fixly.models.cambiarPassword.CambiarPasswordRequest;
 import com.example.fixly.models.proveedores.ProveedoresCategoriaResponse;
+import com.example.fixly.models.solicitarServicio.SolicitarServicioRequest;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -96,5 +98,17 @@ public interface ApiService {
     Call<PerfilProveedorResponse> verPrestador(
             @Header("Authorization") String token,
             @Path("id") int id
+    );
+
+    @PUT("auth/cambiarPassword")
+    Call<RegistroResponse> cambiarPassword(
+            @Header("Authorization") String token,
+            @Body CambiarPasswordRequest request
+    );
+
+    @POST("service-requests/solicitarServicio")
+    Call<RegistroResponse> solicitarServicio(
+            @Header("Authorization") String token,
+            @Body SolicitarServicioRequest request
     );
 }
