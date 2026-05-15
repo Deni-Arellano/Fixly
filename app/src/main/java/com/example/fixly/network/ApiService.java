@@ -4,6 +4,7 @@ import com.example.fixly.models.catalogos.CategoriasResponse;
 import com.example.fixly.models.catalogos.ServiciosResponse;
 import com.example.fixly.models.editarPerfilCliente.EditarPerfilClienteRequest;
 import com.example.fixly.models.editarPerfilProveedor.EditarPerfilProveedorRequest;
+import com.example.fixly.models.historial.DetalleSolicitudResponse;
 import com.example.fixly.models.historial.HistorialResponse;
 import com.example.fixly.models.login.LoginRequest;
 import com.example.fixly.models.login.LoginResponse;
@@ -110,5 +111,29 @@ public interface ApiService {
     Call<RegistroResponse> solicitarServicio(
             @Header("Authorization") String token,
             @Body SolicitarServicioRequest request
+    );
+
+    @GET("service-requests/verDetalleSolicitud/{id}")
+    Call<DetalleSolicitudResponse> verDetalleSolicitud(
+            @Header("Authorization") String token,
+            @Path("id") int id
+    );
+
+    @PUT("service-requests/{id}/cancelar")
+    Call<RegistroResponse> cancelarSolicitud(
+            @Header("Authorization") String token,
+            @Path("id") int id
+    );
+
+    @PUT("service-requests/{id}/aceptar")
+    Call<RegistroResponse> aceptarSolicitud(
+            @Header("Authorization") String token,
+            @Path("id") int id
+    );
+
+    @PUT("service-requests/{id}/finalizar")
+    Call<RegistroResponse> finalizarSolicitud(
+            @Header("Authorization") String token,
+            @Path("id") int id
     );
 }

@@ -80,7 +80,7 @@
             android:weightSum="1">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/boton_guardar_cambiar_contrasena"
+                android:id="@+id/boton_ver_solicitud"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="0.5"

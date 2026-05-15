@@ -140,9 +140,24 @@
 
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/boton_aceptar_solicitud"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:backgroundTint="@color/azul_fixly"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Aceptar solicitud"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:cornerRadius="0dp" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/boton_finalizar_servicio"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_marginTop="8dp"
                 android:backgroundTint="@color/amarillo_fixly"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
@@ -150,6 +165,7 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:cornerRadius="0dp" />
 
         </LinearLayout>
