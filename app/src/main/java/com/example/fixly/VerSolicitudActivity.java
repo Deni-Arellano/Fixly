@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fixly.models.historial.DetalleSolicitudResponse;
+import com.example.fixly.models.calificar.CalificacionStatusResponse;
 import com.example.fixly.models.registroCliente.RegistroResponse;
 import com.example.fixly.network.RetrofitClient;
 
@@ -22,6 +23,7 @@ public class VerSolicitudActivity extends BaseActivity {
     private View btnEditar, btnCancelar, btnCalificar;
 
     private int idSolicitud = -1;
+    private String nombreProveedor = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +77,8 @@ public class VerSolicitudActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(VerSolicitudActivity.this, CalificarServicioActivity.class);
-                    // Pass provider ID or request ID if needed
                     intent.putExtra("id_solicitud", idSolicitud);
+                    intent.putExtra("nombre_proveedor", nombreProveedor);
                     startActivity(intent);
                 }
             });
@@ -154,7 +156,8 @@ public class VerSolicitudActivity extends BaseActivity {
     }
 
     private void mostrarDatos(DetalleSolicitudResponse.DetalleSolicitud datos) {
-        if (txtPrestador != null) txtPrestador.setText(datos.getNombrePrestador() != null ? datos.getNombrePrestador() : "Sin asignar");
+        nombreProveedor = datos.getNombrePrestador() != null ? datos.getNombrePrestador() : "Sin asignar";
+        if (txtPrestador != null) txtPrestador.setText(nombreProveedor);
         if (txtTelefono != null) txtTelefono.setText(datos.getTelefono() != null ? datos.getTelefono() : "Sin teléfono");
         if (txtDireccion != null) txtDireccion.setText(datos.getDireccion());
         if (txtReferencia != null) txtReferencia.setText(datos.getReferencia());
@@ -170,6 +173,30 @@ public class VerSolicitudActivity extends BaseActivity {
         if ("Pendiente".equalsIgnoreCase(datos.getEstadoSolicitud())) {
             if (btnEditar != null) btnEditar.setVisibility(View.VISIBLE);
             if (btnCancelar != null) btnCancelar.setVisibility(View.VISIBLE);
+        } else if ("Finalizada".equalsIgnoreCase(datos.getEstadoSolicitud())) {
+            verificarSiEstaCalificada();
         }
+    }
+
+    private void verificarSiEstaCalificada() {
+        SharedPreferences preferences = getSharedPreferences("fixly_sesion", MODE_PRIVATE);
+        String token = "Bearer " + preferences.getString("access_token", "");
+
+        RetrofitClient.getApiService().verificarCalificacion(token, idSolicitud).enqueue(new Callback<CalificacionStatusResponse>() {
+            @Override
+            public void onResponse(Call<CalificacionStatusResponse> call, Response<CalificacionStatusResponse> response) {
+                if (response.isSuccessful() && response.body() != null && response.body().getDatos() != null) {
+                    boolean calificada = response.body().getDatos().isCalificada();
+                    if (!calificada) {
+                        if (btnCalificar != null) btnCalificar.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CalificacionStatusResponse> call, Throwable t) {
+                // Ignore failure for UI purposes, button remains hidden
+            }
+        });
     }
 }

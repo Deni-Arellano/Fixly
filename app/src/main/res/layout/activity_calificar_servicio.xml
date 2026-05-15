@@ -70,7 +70,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
-                    android:stepSize="0.5"
+                    android:stepSize="1.0"
+                    android:progressTint="@color/amarillo_fixly"
+                    android:secondaryProgressTint="@color/amarillo_fixly"
                     android:layout_gravity="center"
                     android:layout_marginBottom="8dp"/>
 
@@ -100,7 +102,8 @@
                     android:layout_height="wrap_content"
                     android:text="Comentario (opcional)"
                     android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
                     android:layout_marginBottom="8dp"/>
 
                 <EditText
@@ -108,6 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
                     android:hint="Escribe tu experiencia..."
+                    android:textColor="@android:color/black"
                     android:background="@drawable/fondo_input"
                     android:padding="12dp"
                     android:gravity="top"

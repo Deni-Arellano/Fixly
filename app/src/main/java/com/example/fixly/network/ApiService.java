@@ -2,9 +2,12 @@ package com.example.fixly.network;
 
 import com.example.fixly.models.catalogos.CategoriasResponse;
 import com.example.fixly.models.catalogos.ServiciosResponse;
+import com.example.fixly.models.calificar.CalificacionStatusResponse;
+import com.example.fixly.models.calificar.CalificarRequest;
 import com.example.fixly.models.editarPerfilCliente.EditarPerfilClienteRequest;
 import com.example.fixly.models.editarPerfilProveedor.EditarPerfilProveedorRequest;
 import com.example.fixly.models.historial.DetalleSolicitudResponse;
+import com.example.fixly.models.historial.EditarSolicitudRequest;
 import com.example.fixly.models.historial.HistorialResponse;
 import com.example.fixly.models.login.LoginRequest;
 import com.example.fixly.models.login.LoginResponse;
@@ -135,5 +138,25 @@ public interface ApiService {
     Call<RegistroResponse> finalizarSolicitud(
             @Header("Authorization") String token,
             @Path("id") int id
+    );
+
+    @PUT("service-requests/editarSolicitud/{id}")
+    Call<RegistroResponse> editarSolicitud(
+            @Header("Authorization") String token,
+            @Path("id") int id,
+            @Body EditarSolicitudRequest request
+    );
+
+    @GET("service-requests/{id}/calificada")
+    Call<CalificacionStatusResponse> verificarCalificacion(
+            @Header("Authorization") String token,
+            @Path("id") int id
+    );
+
+    @POST("reviews/{id}/calificar")
+    Call<RegistroResponse> calificarServicio(
+            @Header("Authorization") String token,
+            @Path("id") int id,
+            @Body CalificarRequest request
     );
 }
