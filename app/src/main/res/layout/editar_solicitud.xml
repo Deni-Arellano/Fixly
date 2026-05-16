@@ -52,7 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/azul_fixly"
-                android:text="Morelos"
                 android:textColor="@android:color/black" />
 
             <!-- Fila: Números -->
@@ -81,7 +80,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/azul_fixly"
-                        android:text="5"
                         android:textColor="@android:color/black" />
                 </LinearLayout>
 
@@ -103,7 +101,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/azul_fixly"
-                        android:text="A"
                         android:textColor="@android:color/black" />
                 </LinearLayout>
             </LinearLayout>
@@ -122,7 +119,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/azul_fixly"
-                android:text="Tuitán"
                 android:textColor="@android:color/black" />
 
             <!-- Ciudad -->
@@ -139,7 +135,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/azul_fixly"
-                android:text="Estado de México"
                 android:textColor="@android:color/black" />
 
             <!-- Estado -->
@@ -174,7 +169,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/azul_fixly"
-                android:text="99855"
                 android:textColor="@android:color/black" />
 
             <!-- Referencia -->
@@ -191,7 +185,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/azul_fixly"
-                android:text="Casa de dos pisos"
                 android:textColor="@android:color/black" />
 
             <!-- Descripción -->
@@ -209,7 +202,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/azul_fixly"
-                android:text="Reparación de una fuga de mi baño"
                 android:textColor="@android:color/black" />
 
             <!-- BOTONES -->
