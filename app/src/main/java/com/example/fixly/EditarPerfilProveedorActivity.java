@@ -4,15 +4,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.fixly.models.catalogos.Servicio;
 import com.example.fixly.models.catalogos.ServiciosResponse;
 import com.example.fixly.models.editarPerfilProveedor.EditarPerfilProveedorRequest;
@@ -22,12 +28,19 @@ import com.example.fixly.models.verPerfilProveedor.ServicioPerfil;
 import com.example.fixly.network.RetrofitClient;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +49,9 @@ public class EditarPerfilProveedorActivity extends BaseActivity {
 
     private EditText editNombre, editApellidoP, editApellidoM, editTelefono, editDescripcion;
     private LinearLayout contenedorServicios;
+    private ImageView imagenPerfil;
     private String fotoPerfilActual = null;
+    private Uri uriFotoNueva = null;
     private final String nombreRegex = "^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' .-]+$";
     private final String telefonoRegex = "^[0-9]{10,15}$";
 
@@ -52,6 +67,13 @@ public class EditarPerfilProveedorActivity extends BaseActivity {
         editTelefono = findViewById(R.id.edit_telefono);
         editDescripcion = findViewById(R.id.edit_descripcion);
         contenedorServicios = findViewById(R.id.contenedor_servicios);
+        imagenPerfil = findViewById(R.id.imagen_editar_perfil_proveedor);
+
+        View fabCambiarFoto = findViewById(R.id.fab_cambiar_foto);
+
+        View.OnClickListener listenerFoto = v -> seleccionarImagenLauncher.launch("image/*");
+        if (imagenPerfil != null) imagenPerfil.setOnClickListener(listenerFoto);
+        if (fabCambiarFoto != null) fabCambiarFoto.setOnClickListener(listenerFoto);
 
         cargarDatosPerfil();
 
@@ -114,6 +136,13 @@ public class EditarPerfilProveedorActivity extends BaseActivity {
             editApellidoM.setText(datos.getUsuario().getApellidoMaterno());
             editTelefono.setText(datos.getUsuario().getTelefono());
             fotoPerfilActual = datos.getUsuario().getFotoPerfil();
+            
+            if (fotoPerfilActual != null && !fotoPerfilActual.isEmpty()) {
+                Glide.with(this)
+                     .load(fotoPerfilActual)
+                     .placeholder(R.drawable.ic_usuario_placeholder)
+                     .into(imagenPerfil);
+            }
         }
 
         if (datos.getPrestador() != null) {
@@ -228,11 +257,21 @@ public class EditarPerfilProveedorActivity extends BaseActivity {
         enviarActualizacion(request);
     }
 
+    private final ActivityResultLauncher<String> seleccionarImagenLauncher =
+            registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+                if (uri != null) {
+                    uriFotoNueva = uri;
+                    if (imagenPerfil != null) {
+                        imagenPerfil.setImageURI(uri);
+                    }
+                }
+            });
+
     private void enviarActualizacion(EditarPerfilProveedorRequest request) {
         SharedPreferences preferences = getSharedPreferences("fixly_sesion", MODE_PRIVATE);
         String token = "Bearer " + preferences.getString("access_token", "");
 
-        RetrofitClient.getApiService().editarPerfilProveedor(token, request).enqueue(new Callback<RegistroProveedorResponse>() {
+        Callback<RegistroProveedorResponse> callbackCompartido = new Callback<RegistroProveedorResponse>() {
             @Override
             public void onResponse(Call<RegistroProveedorResponse> call, Response<RegistroProveedorResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -262,7 +301,26 @@ public class EditarPerfilProveedorActivity extends BaseActivity {
             public void onFailure(Call<RegistroProveedorResponse> call, Throwable t) {
                 Toast.makeText(EditarPerfilProveedorActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+
+        if (uriFotoNueva != null) {
+            String usuarioJson = new Gson().toJson(request.getUsuario());
+            String prestadorJson = new Gson().toJson(request.getDatosPrestador());
+
+            RequestBody usuarioBody = RequestBody.create(MediaType.parse("application/json"), usuarioJson);
+            RequestBody prestadorBody = RequestBody.create(MediaType.parse("application/json"), prestadorJson);
+
+            File archivoFoto = getFileFromUri(uriFotoNueva);
+            MultipartBody.Part fotoPart = null;
+            if (archivoFoto != null) {
+                RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), archivoFoto);
+                fotoPart = MultipartBody.Part.createFormData("imagen", archivoFoto.getName(), requestFile);
+            }
+
+            RetrofitClient.getApiService().editarPerfilProveedorConFoto(token, fotoPart, usuarioBody, prestadorBody).enqueue(callbackCompartido);
+        } else {
+            RetrofitClient.getApiService().editarPerfilProveedor(token, request).enqueue(callbackCompartido);
+        }
     }
 
     private void mostrarErrorEnInput(String campo, String mensaje) {
@@ -284,6 +342,25 @@ public class EditarPerfilProveedorActivity extends BaseActivity {
             if (msgLower.contains("descripción") || msgLower.contains("obligatoria")) {
                 editDescripcion.setError(mensaje);
             }
+        }
+    }
+
+    private File getFileFromUri(Uri uri) {
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            File file = new File(getCacheDir(), "perfil_proveedor_temp.jpg");
+            OutputStream outputStream = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+            }
+            outputStream.close();
+            inputStream.close();
+            return file;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

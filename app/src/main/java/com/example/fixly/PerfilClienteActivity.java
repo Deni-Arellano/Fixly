@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import com.example.fixly.models.verPerfilCliente.PerfilCliente;
 import com.example.fixly.models.verPerfilCliente.PerfilClienteResponse;
@@ -18,6 +21,7 @@ import retrofit2.Response;
 public class PerfilClienteActivity extends BaseActivity {
 
     private TextView textoNombre, textoCorreo, textoTelefono;
+    private ImageView imagenPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,7 @@ public class PerfilClienteActivity extends BaseActivity {
         textoNombre = findViewById(R.id.texto_nombre_cliente);
         textoCorreo = findViewById(R.id.texto_correo_cliente);
         textoTelefono = findViewById(R.id.texto_telefono_cliente);
+        imagenPerfil = findViewById(R.id.imagen_perfil_cliente);
 
         View btnEditarPerfil = findViewById(R.id.boton_editar_perfil_cliente);
         btnEditarPerfil.setOnClickListener(new View.OnClickListener() {
@@ -115,5 +120,12 @@ public class PerfilClienteActivity extends BaseActivity {
         textoNombre.setText(nombreCompleto);
         textoCorreo.setText(perfil.getCorreo() != null ? perfil.getCorreo() : "Sin correo");
         textoTelefono.setText(perfil.getTelefono() != null ? perfil.getTelefono() : "Sin teléfono");
+
+        if (perfil.getFotoPerfil() != null && !perfil.getFotoPerfil().isEmpty()) {
+            Glide.with(this)
+                 .load(perfil.getFotoPerfil())
+                 .placeholder(R.drawable.ic_usuario_placeholder)
+                 .into(imagenPerfil);
+        }
     }
 }

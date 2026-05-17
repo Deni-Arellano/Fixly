@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import com.example.fixly.adapters.ComentarioAdapter;
 import com.example.fixly.models.verPerfilProveedor.PerfilProveedorResponse;
 import com.example.fixly.models.verPerfilProveedor.PrestadorPerfil;
@@ -130,6 +132,14 @@ public class MiPerfilProveedorActivity extends BaseActivity {
             textoNombre.setText(datos.getUsuario().getNombreCompleto());
             textoCorreo.setText(datos.getUsuario().getCorreo());
             textoTelefono.setText(datos.getUsuario().getTelefono());
+
+            String fotoPerfil = datos.getUsuario().getFotoPerfil();
+            if (fotoPerfil != null && !fotoPerfil.isEmpty()) {
+                Glide.with(this)
+                     .load(fotoPerfil)
+                     .placeholder(R.drawable.ic_usuario_placeholder)
+                     .into(imagenProveedor);
+            }
         }
 
         if (datos.getPrestador() != null) {

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fixly.PerfilProveedorActivity;
 import com.example.fixly.R;
 import com.example.fixly.models.proveedores.ProveedorCategoria;
+import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class ProveedoresAdapter extends RecyclerView.Adapter<ProveedoresAdapter.ProveedorViewHolder> {
@@ -46,10 +47,14 @@ public class ProveedoresAdapter extends RecyclerView.Adapter<ProveedoresAdapter.
             holder.txtDescripcion.setText("Sin descripción");
         }
 
-        // Si quisieras cargar la imagen (foto_perfil) puedes usar Glide o Picasso aquí
-        // if (proveedor.getFotoPerfil() != null) {
-        //     Glide.with(context).load(proveedor.getFotoPerfil()).into(holder.imgPerfil);
-        // }
+        if (proveedor.getFotoPerfil() != null && !proveedor.getFotoPerfil().isEmpty()) {
+            Glide.with(context)
+                 .load(proveedor.getFotoPerfil())
+                 .placeholder(R.drawable.ic_usuario_placeholder)
+                 .into(holder.imgPerfil);
+        } else {
+            holder.imgPerfil.setImageResource(R.drawable.ic_usuario_placeholder);
+        }
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, PerfilProveedorActivity.class);

@@ -2,6 +2,7 @@ package com.example.fixly;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import com.bumptech.glide.Glide;
 import com.example.fixly.models.editarPerfilCliente.EditarPerfilClienteRequest;
 import com.example.fixly.models.registroCliente.RegistroResponse;
 import com.example.fixly.models.verPerfilCliente.PerfilCliente;
@@ -18,6 +28,9 @@ import com.google.gson.Gson;
 
 import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,6 +40,15 @@ public class EditarPerfilClienteActivity extends BaseActivity {
     private EditText editNombre, editApellidoPaterno, editApellidoMaterno, editTelefono;
     private ImageView imagenPerfil;
     private String fotoPerfilActual = null;
+    private Uri uriFotoNueva = null;
+
+    private final ActivityResultLauncher<String> seleccionarImagenLauncher =
+            registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+                if (uri != null) {
+                    uriFotoNueva = uri;
+                    imagenPerfil.setImageURI(uri);
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +60,21 @@ public class EditarPerfilClienteActivity extends BaseActivity {
         editApellidoMaterno = findViewById(R.id.edit_apellido_m_editar_perfil_cliente);
         editTelefono = findViewById(R.id.edit_telefono_editar_perfil_cliente);
         imagenPerfil = findViewById(R.id.imagen_editar_perfil_cliente);
+        View fabCambiarFoto = findViewById(R.id.fab_cambiar_foto);
+
+        View.OnClickListener listenerFoto = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seleccionarImagenLauncher.launch("image/*");
+            }
+        };
+
+        if (imagenPerfil != null) {
+            imagenPerfil.setOnClickListener(listenerFoto);
+        }
+        if (fabCambiarFoto != null) {
+            fabCambiarFoto.setOnClickListener(listenerFoto);
+        }
 
         cargarPerfil();
 
@@ -129,6 +166,13 @@ public class EditarPerfilClienteActivity extends BaseActivity {
         editApellidoMaterno.setText(datos.getApellidoMaterno());
         editTelefono.setText(datos.getTelefono());
         fotoPerfilActual = datos.getFotoPerfil();
+        
+        if (fotoPerfilActual != null && !fotoPerfilActual.isEmpty()) {
+            Glide.with(this)
+                 .load(fotoPerfilActual)
+                 .placeholder(R.drawable.ic_usuario_placeholder)
+                 .into(imagenPerfil);
+        }
     }
 
     private void actualizarPerfil() {
@@ -138,7 +182,7 @@ public class EditarPerfilClienteActivity extends BaseActivity {
         String telefono = editTelefono.getText().toString().trim();
 
 
-        EditarPerfilClienteRequest request = new EditarPerfilClienteRequest(
+        EditarPerfilClienteRequest requestJson = new EditarPerfilClienteRequest(
                 fotoPerfilActual,
                 nombre,
                 apellidoP,
@@ -149,7 +193,7 @@ public class EditarPerfilClienteActivity extends BaseActivity {
         SharedPreferences preferences = getSharedPreferences("fixly_sesion", MODE_PRIVATE);
         String token = "Bearer " + preferences.getString("access_token", "");
 
-        RetrofitClient.getApiService().editarPerfil(token, request).enqueue(new Callback<RegistroResponse>() {
+        Callback<RegistroResponse> callbackCompartido = new Callback<RegistroResponse>() {
             @Override
             public void onResponse(Call<RegistroResponse> call, Response<RegistroResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -180,7 +224,25 @@ public class EditarPerfilClienteActivity extends BaseActivity {
             public void onFailure(Call<RegistroResponse> call, Throwable t) {
                 Toast.makeText(EditarPerfilClienteActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+
+        if (uriFotoNueva != null) {
+            // Opción 1: Enviar Multipart
+            String usuarioJson = new Gson().toJson(requestJson);
+            RequestBody usuarioBody = RequestBody.create(MediaType.parse("application/json"), usuarioJson);
+
+            File archivoFoto = getFileFromUri(uriFotoNueva);
+            MultipartBody.Part fotoPart = null;
+            if (archivoFoto != null) {
+                RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), archivoFoto);
+                fotoPart = MultipartBody.Part.createFormData("imagen", archivoFoto.getName(), requestFile);
+            }
+
+            RetrofitClient.getApiService().editarPerfilConFoto(token, fotoPart, usuarioBody).enqueue(callbackCompartido);
+        } else {
+            // No hay foto nueva: Enviar JSON
+            RetrofitClient.getApiService().editarPerfil(token, requestJson).enqueue(callbackCompartido);
+        }
     }
 
     private void mostrarErrorEnInput(String campo, String mensaje) {
@@ -197,6 +259,25 @@ public class EditarPerfilClienteActivity extends BaseActivity {
             case "telefono":
                 editTelefono.setError(mensaje);
                 break;
+        }
+    }
+
+    private File getFileFromUri(Uri uri) {
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            File file = new File(getCacheDir(), "perfil_temp.jpg");
+            OutputStream outputStream = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+            }
+            outputStream.close();
+            inputStream.close();
+            return file;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.fixly.models.historial.DetalleSolicitudResponse;
 import com.example.fixly.models.calificar.CalificacionStatusResponse;
 import com.example.fixly.models.registroCliente.RegistroResponse;
@@ -20,6 +22,7 @@ public class VerSolicitudActivity extends BaseActivity {
 
     private TextView txtPrestador, txtTelefono, txtDireccion, txtReferencia;
     private TextView txtDescripcion, txtEstado, txtTipo, txtFecha;
+    private ImageView imagenPrestador;
     private View btnEditar, btnCancelar, btnCalificar;
 
     private int idSolicitud = -1;
@@ -38,6 +41,7 @@ public class VerSolicitudActivity extends BaseActivity {
         txtEstado = findViewById(R.id.estado_ver_solicitud);
         txtTipo = findViewById(R.id.tipo_ver_solicitud);
         txtFecha = findViewById(R.id.fecha_ver_solicitud);
+        imagenPrestador = findViewById(R.id.imagen_prestador_ver_solicitud);
 
         btnEditar = findViewById(R.id.boton_editar_solicitud);
         btnCancelar = findViewById(R.id.boton_cancelar_solicitud);
@@ -165,6 +169,15 @@ public class VerSolicitudActivity extends BaseActivity {
         if (txtEstado != null) txtEstado.setText(datos.getEstadoSolicitud());
         if (txtTipo != null) txtTipo.setText(datos.getNombreServicio());
         if (txtFecha != null) txtFecha.setText(datos.getCreadoEn());
+
+        if (datos.getFotoPerfil() != null && !datos.getFotoPerfil().isEmpty()) {
+            if (imagenPrestador != null) {
+                Glide.with(this)
+                     .load(datos.getFotoPerfil())
+                     .placeholder(R.drawable.ic_usuario_placeholder)
+                     .into(imagenPrestador);
+            }
+        }
 
         if (btnEditar != null) btnEditar.setVisibility(View.GONE);
         if (btnCancelar != null) btnCancelar.setVisibility(View.GONE);

@@ -15,6 +15,9 @@ public class EditarPerfilProveedorRequest {
         this.datosPrestador = datosPrestador;
     }
 
+    public UsuarioEdit getUsuario() { return usuario; }
+    public DatosPrestadorEdit getDatosPrestador() { return datosPrestador; }
+
     public static class UsuarioEdit {
         @SerializedName("foto_perfil")
         private String fotoPerfil;
