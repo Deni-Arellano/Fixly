@@ -208,7 +208,7 @@ public class VerSolicitudActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<CalificacionStatusResponse> call, Throwable t) {
-                // Ignore failure for UI purposes, button remains hidden
+
             }
         });
     }

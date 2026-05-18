@@ -58,7 +58,7 @@ public class ProveedoresAdapter extends RecyclerView.Adapter<ProveedoresAdapter.
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, PerfilProveedorActivity.class);
-            // Puedes pasar el ID del proveedor a la siguiente actividad
+
             intent.putExtra("id_proveedor", proveedor.getIdPrestador());
             context.startActivity(intent);
         });

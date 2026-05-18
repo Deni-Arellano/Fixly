@@ -41,7 +41,7 @@ public class UsuariosAdminAdapter extends RecyclerView.Adapter<UsuariosAdminAdap
         holder.tvTelefono.setText(usuario.getTelefono());
         holder.tvRol.setText(usuario.getRol());
         
-        // Evitar que el listener se dispare al setear el valor inicial
+
         holder.swEstado.setOnCheckedChangeListener(null);
         holder.swEstado.setChecked(usuario.getEstadoId() == 1);
         holder.tvEstadoBadge.setText(usuario.getEstado());
@@ -52,7 +52,7 @@ public class UsuariosAdminAdapter extends RecyclerView.Adapter<UsuariosAdminAdap
              holder.tvEstadoBadge.setBackgroundResource(R.drawable.bg_estado_suspendido);
         }
 
-        // Listener para el cambio de estado
+
         holder.swEstado.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (listener != null) {
                 listener.onStatusChange(usuario, isChecked);

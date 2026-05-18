@@ -41,20 +41,20 @@ public class AdministradorUsuariosActivity extends BaseActivity implements Usuar
         super.onCreate(savedInstanceState);
         setupEdgeToEdge(R.layout.activity_admin_usuarios);
 
-        // 1. Inicializar RecyclerView con el listener
+
         rvUsuarios = findViewById(R.id.rvUsuarios);
         rvUsuarios.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UsuariosAdminAdapter(listaUsuarios, this);
         rvUsuarios.setAdapter(adapter);
         
-        // Mostrar el RecyclerView
+
         rvUsuarios.setVisibility(View.VISIBLE);
         findViewById(R.id.item_usuario_preview).setVisibility(View.GONE);
 
-        // 2. Cargar usuarios desde el servidor
+
         cargarUsuarios();
 
-        // 3. Configurar la barra de búsqueda
+
         etBuscarUsuario = findViewById(R.id.etBuscarUsuario);
         if (etBuscarUsuario != null) {
             etBuscarUsuario.addTextChangedListener(new TextWatcher() {
@@ -81,7 +81,7 @@ public class AdministradorUsuariosActivity extends BaseActivity implements Usuar
                         }
                     };
 
-                    // Esperar 500 milisegundos después de que el usuario deje de escribir
+
                     searchHandler.postDelayed(searchRunnable, 500);
                 }
             });
@@ -160,7 +160,7 @@ public class AdministradorUsuariosActivity extends BaseActivity implements Usuar
 
     @Override
     public void onStatusChange(UsuarioAdmin usuario, boolean isChecked) {
-        // Definir nuevo ID de estado: 1 para Activo (true), 2 para Inactivo (false)
+
         int nuevoEstadoId = isChecked ? 1 : 2;
         
         SharedPreferences preferences = getSharedPreferences("fixly_sesion", MODE_PRIVATE);
@@ -173,11 +173,11 @@ public class AdministradorUsuariosActivity extends BaseActivity implements Usuar
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(AdministradorUsuariosActivity.this, "Estado actualizado", Toast.LENGTH_SHORT).show();
-                    // Refrescamos la lista para ver el texto del badge actualizado
+
                     cargarUsuarios();
                 } else {
                     Toast.makeText(AdministradorUsuariosActivity.this, "Error al actualizar estado", Toast.LENGTH_SHORT).show();
-                    // Si falló, refrescamos para que el switch vuelva a su posición real
+
                     cargarUsuarios();
                 }
             }

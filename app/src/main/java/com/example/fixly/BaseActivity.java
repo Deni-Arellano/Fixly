@@ -26,7 +26,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Si el usuario intenta volver atrás tras cerrar sesión, esto lo detecta y lo saca
         verificarSesion();
     }
 
@@ -46,10 +45,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void irALogin() {
         Intent intent = new Intent(this, MainActivity.class);
-        // Borramos todo el historial de la pila
+
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        // finishAffinity cierra todas las actividades del app en este celular
+
         finishAffinity();
     }
 

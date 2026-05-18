@@ -227,7 +227,7 @@ public class EditarPerfilClienteActivity extends BaseActivity {
         };
 
         if (uriFotoNueva != null) {
-            // Opción 1: Enviar Multipart
+
             String usuarioJson = new Gson().toJson(requestJson);
             RequestBody usuarioBody = RequestBody.create(MediaType.parse("application/json"), usuarioJson);
 
@@ -240,7 +240,7 @@ public class EditarPerfilClienteActivity extends BaseActivity {
 
             RetrofitClient.getApiService().editarPerfilConFoto(token, fotoPart, usuarioBody).enqueue(callbackCompartido);
         } else {
-            // No hay foto nueva: Enviar JSON
+
             RetrofitClient.getApiService().editarPerfil(token, requestJson).enqueue(callbackCompartido);
         }
     }

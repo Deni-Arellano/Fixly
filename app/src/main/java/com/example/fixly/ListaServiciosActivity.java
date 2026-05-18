@@ -28,7 +28,7 @@ public class ListaServiciosActivity extends BaseActivity {
 
         setupEdgeToEdge(R.layout.lista_servicios);
 
-        // para traerme el id y el titulo del servicio seleccionado y mostrar el servicio en la pantalla
+
         int idServicio = getIntent().getIntExtra("id_servicio", -1);
         String nombreServicio = getIntent().getStringExtra("nombre_servicio");
 
@@ -37,13 +37,13 @@ public class ListaServiciosActivity extends BaseActivity {
             tvTitulo.setText("¿Necesitas servicio de " + nombreServicio + "?");
         }
 
-        // Reference the RecyclerView defined in lista_servicios.xml
+
         RecyclerView recyclerView = findViewById(R.id.lista_proveedores);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ProveedoresAdapter adapter = new ProveedoresAdapter(new ArrayList<>(), this);
         recyclerView.setAdapter(adapter);
 
-        // SELECCION DEL PERFIL DEL PROVVEDOR
+
         View tarjeta = findViewById(R.id.item_proveedor);
         if (tarjeta != null) {
             tarjeta.setVisibility(View.GONE);

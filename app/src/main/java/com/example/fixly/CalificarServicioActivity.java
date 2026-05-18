@@ -109,7 +109,7 @@ public class CalificarServicioActivity extends BaseActivity {
             public void onResponse(Call<RegistroResponse> call, Response<RegistroResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(CalificarServicioActivity.this, response.body().getMensaje(), Toast.LENGTH_SHORT).show();
-                    // Volver a la solicitud recargada
+
                     Intent intent = new Intent(CalificarServicioActivity.this, VerSolicitudActivity.class);
                     intent.putExtra("id_solicitud", idSolicitud);
                     startActivity(intent);

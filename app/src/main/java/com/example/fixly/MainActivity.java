@@ -103,15 +103,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else {
                     try {
-                        // Leer el cuerpo del error enviado por el servidor
+
                         String errorBody = response.errorBody().string();
                         LoginResponse errorRes = new Gson().fromJson(errorBody, LoginResponse.class);
                         
                         if (response.code() == 403) {
-                            // Mostrar mensaje de cuenta desactivada/suspendida
+
                             Toast.makeText(MainActivity.this, errorRes.getMensaje(), Toast.LENGTH_LONG).show();
                         } else {
-                            // Otros errores (401, etc.)
+
                             Toast.makeText(MainActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {

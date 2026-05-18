@@ -116,7 +116,7 @@ public class EditarSolicitudActivity extends BaseActivity {
             public void onResponse(Call<DetalleSolicitudResponse> call, Response<DetalleSolicitudResponse> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().getDatos() != null) {
                     DetalleSolicitudResponse.DetalleSolicitud datos = response.body().getDatos();
-                    // Preload description and reference
+
                     if (editDescripcion != null && datos.getDescripcion() != null) {
                         editDescripcion.setText(datos.getDescripcion());
                     }
@@ -176,7 +176,7 @@ public class EditarSolicitudActivity extends BaseActivity {
             public void onResponse(Call<RegistroResponse> call, Response<RegistroResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(EditarSolicitudActivity.this, response.body().getMensaje(), Toast.LENGTH_SHORT).show();
-                    // Optional: Navigate to a fresh VerSolicitudActivity so it forces a reload.
+
                     Intent intent = new Intent(EditarSolicitudActivity.this, VerSolicitudActivity.class);
                     intent.putExtra("id_solicitud", idSolicitud);
                     startActivity(intent);
