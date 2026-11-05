@@ -129,3 +129,11 @@ constraintlayout = "2.1.4"
 glide          = "4.16.0"
 ```
 
+---
+
+## 👥 Desarrolladoras
+
+- **Fátima Talamantes** — [@Fatima-Talamantes](https://github.com/Fatima-Talamantes)
+- **Deni Arellano** — [@Deni-Arellano](https://github.com/Deni-Arellano)
+
+
